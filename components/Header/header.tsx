@@ -56,7 +56,7 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
   const { classes, cx } = useStyles();
 
   const items = links.map((link) => (
-    <Button component={NextLink} href={link.link} > {link.label}</Button>
+    <Button color="blue" className="button" component={NextLink} href={link.link} > {link.label}</Button>
   ));
 
   return (

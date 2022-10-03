@@ -1,6 +1,6 @@
 import { AppProps } from 'next/app'
 import Head from 'next/head'
-import { MantineProvider } from '@mantine/core'
+import { ColorSchemeProvider, MantineProvider } from '@mantine/core'
 import  Layout from '../components/layout';
 
 export default function App(props: AppProps) {
@@ -92,6 +92,29 @@ export default function App(props: AppProps) {
                     },
                     primaryColor: 'base',
                     fontFamily: 'Poppins, sans-serif',
+                    /** Global Styling */
+                   globalStyles: (theme) => ({
+                      '*, *::before, *::after': {
+                        boxSizing: 'border-box',
+                      },
+            
+                      body: {
+                        ...theme.fn.fontStyles(),
+                        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+                        color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
+                        lineHeight: theme.lineHeight,
+                      },
+                      '.button': {
+                        fontWeight: 600,
+                      },
+                      '.title': {
+                        fontWeight: 800
+                      },
+            
+                      '#your-id > [data-active]': {
+                        backgroundColor: 'pink',
+                      },
+                    }),
                 }}
             >
               <Layout>

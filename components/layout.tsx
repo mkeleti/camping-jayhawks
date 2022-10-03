@@ -32,7 +32,7 @@ export default function Layout({ children }) {
             }}
             footer={
                 <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
-                    <Footer p="md" height="60">
+                    <Footer p="xs" height="30">
                         <FooterCentered links={links} />
                     </Footer>
                 </MediaQuery>
