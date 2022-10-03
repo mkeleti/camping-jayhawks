@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useMantineTheme, Anchor, Container } from '@mantine/core'
 
 import Head from 'next/head'
+import { TwitterTimelineEmbed } from 'react-twitter-embed'
 
 export default function Announcements() {
     const theme = useMantineTheme()
@@ -12,18 +13,12 @@ export default function Announcements() {
             </Head>
             <div>
                 <Container>
-                    <Anchor
-                        className="twitter-timeline"
-                        data-theme="light"
-                        href="https://twitter.com/KUBBallCamping?ref_src=twsrc%5Etfw"
-                    >
-                        Tweets by KUBBallCamping
-                    </Anchor>{' '}
-                    <script
-                        async
-                        src="https://platform.twitter.com/widgets.js"
-                        charSet="utf-8"
-                    ></script>
+                    <TwitterTimelineEmbed
+                        sourceType="profile"
+                        screenName="KUBBallCamping"
+                        noHeader={true}
+                        noFooter={true}
+                        />
                 </Container>
             </div>
         </>

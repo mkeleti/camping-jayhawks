@@ -17,6 +17,7 @@ export default function App(props: AppProps) {
                 <link href="https://fonts.googleapis.com/css2?family=Poppins&display=optional"
                 rel="stylesheet"
                 />
+                
             </Head>
 
             <MantineProvider
