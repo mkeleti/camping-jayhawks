@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../utils/supabaseClient'
-import { Table, Text } from '@mantine/core'
+import { Table, Text, Button } from '@mantine/core'
 
 export default function GroupTable() {
     const [groups, setGroups] = useState([])
@@ -25,10 +25,9 @@ export default function GroupTable() {
         <Table>
             <thead>
                 <tr>
-                    <th>Group Name</th>
+                    <th>Name</th>
                     <th>Members</th>
-                    <th>Public</th>
-                    <th>Creation Time</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -36,8 +35,7 @@ export default function GroupTable() {
                     <tr key={element.id}>
                         <td>{element.name}</td>
                         <td>{element.members}</td>
-                        <td>{element.public}</td>
-                        <td>{element.created_at}</td>
+                        <td><Button color="green" size='xs'>Join Group</Button></td>
                     </tr>
                 ))}
             </tbody>
