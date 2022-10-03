@@ -1,16 +1,17 @@
-import { useState } from 'react'
-import { useMantineTheme } from '@mantine/core'
-
+import { Container, Paper, Text } from '@mantine/core'
 import Head from 'next/head'
 
 export default function Camping() {
-    const theme = useMantineTheme()
     return (
         <>
             <Head>
                 <title>Camping</title>
             </Head>
-            camping
+            <Container>
+                <Paper>
+                    <Text>Camping Page</Text>
+                </Paper>
+            </Container>
         </>
     )
 }
