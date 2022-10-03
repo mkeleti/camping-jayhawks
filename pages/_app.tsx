@@ -1,6 +1,7 @@
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { MantineProvider } from '@mantine/core'
+import  Layout from '../components/layout';
 
 export default function App(props: AppProps) {
     const { Component, pageProps } = props
@@ -92,7 +93,9 @@ export default function App(props: AppProps) {
                     fontFamily: 'Poppins, sans-serif',
                 }}
             >
+              <Layout>
                 <Component {...pageProps} />
+                </Layout>
             </MantineProvider>
         </>
     )
