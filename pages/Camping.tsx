@@ -3,14 +3,14 @@ import { useMantineTheme } from '@mantine/core'
 
 import Head from 'next/head'
 
-export default function Home() {
+export default function Camping() {
     const theme = useMantineTheme()
     return (
         <>
             <Head>
-                <title>Groups</title>
+                <title>Camping</title>
             </Head>
-            groups
+            camping
         </>
     )
 }
