@@ -14,9 +14,9 @@ export default function App(props: AppProps) {
                     name="viewport"
                     content="minimum-scale=1, initial-scale=1, width=device-width"
                 />
-                <link href="https://fonts.googleapis.com/css2?family=Poppins&display=optional">
+                <link href="https://fonts.googleapis.com/css2?family=Poppins&display=optional"
                 rel="stylesheet"
-                </link>
+                />
             </Head>
 
             <MantineProvider

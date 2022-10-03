@@ -1,6 +1,6 @@
 import { createStyles, Anchor, Group, ActionIcon, Button } from '@mantine/core';
 import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram } from '@tabler/icons';
-import Link from 'next/link';
+import { NextLink } from '@mantine/next';
 
 
 const useStyles = createStyles((theme) => ({
@@ -33,12 +33,7 @@ interface FooterCenteredProps {
 export function FooterCentered({ links }: FooterCenteredProps) {
   const { classes } = useStyles();
   const items = links.map((link) => (
-    <Link
-      key={link.label}
-      href={link.link}
-    >
-      <Button component="a" > {link.label}</Button>
-    </Link>
+      <Button component={NextLink} href={link.link} > {link.label}</Button>
   ));
 
   return (

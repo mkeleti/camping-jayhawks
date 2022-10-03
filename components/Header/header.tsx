@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { createStyles, Header, Container, Group, Burger, Text, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import Link from 'next/link';
+import { NextLink } from '@mantine/next';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -56,12 +56,7 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
   const { classes, cx } = useStyles();
 
   const items = links.map((link) => (
-    <Link
-      key={link.label}
-      href={link.link}
-    >
-      <Button component="a" className={cx(classes.link, { [classes.linkActive]: active === link.link })}> {link.label}</Button>
-    </Link>
+    <Button component={NextLink} href={link.link} > {link.label}</Button>
   ));
 
   return (
