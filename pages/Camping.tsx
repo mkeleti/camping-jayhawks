@@ -1,4 +1,4 @@
-import { Container, Paper, Text, Card, Title, Center } from '@mantine/core'
+import { Container, Paper, Text, Card, Title, Center, SimpleGrid, Button } from '@mantine/core'
 import Head from 'next/head'
 
 export default function Camping() {
@@ -13,7 +13,7 @@ export default function Camping() {
             <Container>
                 <Card shadow="sm" mt="lg" radius="lg">
                     <Paper>
-                        <Text>Camping Page</Text>
+                        <SimpleGrid cols={2}><Button color="green">Roll Call</Button><Button color="yellow">Suspend</Button></SimpleGrid>
                     </Paper>
                 </Card>
             </Container>
