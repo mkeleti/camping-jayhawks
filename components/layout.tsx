@@ -13,7 +13,9 @@ import {
 import { HeaderSimple } from '../components/Header/header'
 import { FooterCentered } from '../components/Footer/footer'
 
-const links = [{ link: 'https://mantine.dev', label: 'Home' }]
+const links = [{ link: '/', label: 'Groups' },
+{ link: '/Announcements', label: 'Announcements' },
+{ link: '/Camping', label: 'Camping' },]
 
 export default function Layout({ children }) {
     const theme = useMantineTheme()
