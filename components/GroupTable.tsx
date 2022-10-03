@@ -22,12 +22,12 @@ export default function GroupTable() {
     
 
     return (
-        <Table>
+        <Table striped highlightOnHover withColumnBorders>
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Members</th>
-                    <th></th>
+                    <th>Join</th>
                 </tr>
             </thead>
             <tbody>

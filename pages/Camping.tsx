@@ -1,4 +1,4 @@
-import { Container, Paper, Text } from '@mantine/core'
+import { Container, Paper, Text, Card, Title, Center } from '@mantine/core'
 import Head from 'next/head'
 
 export default function Camping() {
@@ -7,10 +7,15 @@ export default function Camping() {
             <Head>
                 <title>Camping</title>
             </Head>
+            <Center>
+                <Title> Camping </Title>
+            </Center>
             <Container>
-                <Paper>
-                    <Text>Camping Page</Text>
-                </Paper>
+                <Card shadow="sm" mt="lg" radius="lg">
+                    <Paper>
+                        <Text>Camping Page</Text>
+                    </Paper>
+                </Card>
             </Container>
         </>
     )
