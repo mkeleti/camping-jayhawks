@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useMantineTheme, Container, Paper, Title, Center, Card } from '@mantine/core'
+import { useMantineTheme, Container, Paper, Title, Center, Card, Button } from '@mantine/core'
 import GroupTable from '../components/GroupTable'
 
 import Head from 'next/head'
@@ -18,6 +18,7 @@ export default function Home() {
                     <GroupTable />
                 </Paper>
               </Card>
+              <Center mt="lg"><Button color="yellow" size="lg" > Create Group </Button></Center>
             </Container>
         </>
     )
