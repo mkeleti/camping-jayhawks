@@ -1,21 +1,17 @@
-import { useState, useEffect } from 'react'
-import { useMantineTheme } from '@mantine/core'
-import  GroupTable from '../components/GroupTable';
+import { Container, Paper, Text } from '@mantine/core'
 import Head from 'next/head'
 
 export default function Camping() {
-    const theme = useMantineTheme()
-    const [groups, setGroups] = useState([]);
-    const [loading, setLoading] = useState(true);
-    
     return (
         <>
             <Head>
                 <title>Camping</title>
             </Head>
-            <GroupTable />
+            <Container>
+                <Paper>
+                    <Text>Camping Page</Text>
+                </Paper>
+            </Container>
         </>
     )
 }
-
-

@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { useMantineTheme } from '@mantine/core'
+import { useMantineTheme, Container, Paper } from '@mantine/core'
+import GroupTable from '../components/GroupTable'
 
 import Head from 'next/head'
 
@@ -10,7 +11,11 @@ export default function Home() {
             <Head>
                 <title>Groups</title>
             </Head>
-            groups
+            <Container>
+                <Paper>
+                    <GroupTable />
+                </Paper>
+            </Container>
         </>
     )
 }
