@@ -1,6 +1,4 @@
-import { useState } from 'react'
 import {
-    useMantineTheme,
     Container,
     Paper,
     Title,
@@ -10,11 +8,10 @@ import {
     Group,
 } from '@mantine/core'
 import GroupTable from '../components/GroupTable'
-
+import { NextLink  } from '@mantine/next';
 import Head from 'next/head'
 
 export default function Home() {
-    const theme = useMantineTheme()
     return (
         <>
             <Head>
@@ -34,13 +31,13 @@ export default function Home() {
                         <Button
                             color="yellow"
                             size="lg"
+                            component={NextLink}
                             href="Groups/CreateGroup"
-                            component="a"
                         >
                             {' '}
                             Create Group{' '}
                         </Button>
-                        <Button color="yellow" size="lg" component="a">
+                        <Button color="yellow" component={NextLink} href="/"  size="lg" >
                             {' '}
                             Join Private Group{' '}
                         </Button>

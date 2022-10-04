@@ -1,16 +1,10 @@
 import {
     createStyles,
-    Anchor,
     Group,
-    ActionIcon,
     Button,
     SimpleGrid,
 } from '@mantine/core'
-import {
-    IconBrandTwitter,
-    IconBrandYoutube,
-    IconBrandInstagram,
-} from '@tabler/icons'
+
 import { NextLink } from '@mantine/next'
 
 const useStyles = createStyles((theme) => ({

@@ -1,6 +1,6 @@
 import { AppProps } from 'next/app'
 import Head from 'next/head'
-import { ColorSchemeProvider, MantineProvider } from '@mantine/core'
+import { MantineProvider } from '@mantine/core'
 import  Layout from '../components/layout';
 
 export default function App(props: AppProps) {
@@ -14,10 +14,6 @@ export default function App(props: AppProps) {
                     name="viewport"
                     content="minimum-scale=1, initial-scale=1, width=device-width"
                 />
-                <link href="https://fonts.googleapis.com/css2?family=Poppins&display=optional"
-                rel="stylesheet"
-                />
-                
             </Head>
 
             <MantineProvider

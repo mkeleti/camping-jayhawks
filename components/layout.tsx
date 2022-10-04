@@ -1,13 +1,8 @@
-import { useState } from 'react'
 import {
     AppShell,
-    Navbar,
     Header,
     Footer,
-    Aside,
-    Text,
     MediaQuery,
-    Burger,
     useMantineTheme,
 } from '@mantine/core'
 import { HeaderSimple } from '../components/Header/header'
@@ -20,7 +15,7 @@ const links = [{ link: '/', label: 'Groups' },
 
 export default function Layout({ children }) {
     const theme = useMantineTheme()
-    const [opened, setOpened] = useState(false)
+
     return (
         <AppShell
             styles={{

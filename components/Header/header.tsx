@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {
     createStyles,
     Header,
@@ -72,8 +71,7 @@ interface HeaderSimpleProps {
 
 export function HeaderSimple({ links }: HeaderSimpleProps) {
     const [opened, { toggle }] = useDisclosure(false)
-    const [active, setActive] = useState(links[0].link)
-    const { classes, cx } = useStyles()
+    const { classes } = useStyles()
 
     const items = links.map((link) => (
         <Button

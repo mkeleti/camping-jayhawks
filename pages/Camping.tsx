@@ -1,14 +1,15 @@
 import {
     Container,
     Paper,
-    Text,
     Card,
     Title,
     Center,
     SimpleGrid,
     Button,
 } from '@mantine/core'
+import { NextLink  } from '@mantine/next';
 import Head from 'next/head'
+
 
 export default function Camping() {
     return (
@@ -23,8 +24,8 @@ export default function Camping() {
                 <Card shadow="sm" mt="lg" radius="lg">
                     <Paper>
                         <SimpleGrid cols={2}>
-                            <Button color="green">Roll Call</Button>
-                            <Button color="yellow">Suspend</Button>
+                            <Button component={NextLink} href="/" color="green">Roll Call</Button>
+                            <Button component={NextLink} href="/"  color="yellow">Suspend</Button>
                         </SimpleGrid>
                     </Paper>
                 </Card>
