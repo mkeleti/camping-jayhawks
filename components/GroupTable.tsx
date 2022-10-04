@@ -2,19 +2,28 @@ import { useState, useEffect } from 'react'
 import { supabase } from '../utils/supabaseClient'
 import { Table, Center, Button, Loader} from '@mantine/core'
 
+
 export default function GroupTable() {
-    const [groups, setGroups] = useState([])
+    const [groups, setGroups] = useState<group[]>([])
     const [loading, setLoading] = useState(true)
+    
+    interface group {
+        id: number,
+        created_at: string,
+        name: string,
+        members: Array<string>,
+        public: boolean
+    }
+
 
     useEffect(() => {
-        fetchGroups()
+        async function fetchGroups(): Promise<group[] | null> {
+            const { data } = await supabase.from('groups').select()
+            setLoading(false)
+            return data
+        }
+        fetchGroups().then((data: group[]) => {setGroups(data)})
     }, [])
-
-    async function fetchGroups() {
-        const { data } = await supabase.from('groups').select()
-        setGroups(data)
-        setLoading(false)
-    }
 
     if (loading) {
         return (
