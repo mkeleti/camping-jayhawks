@@ -34,12 +34,14 @@ export default function Home() {
                             component={NextLink}
                             href="Groups/CreateGroup"
                         >
-                            {' '}
-                            Create Group{' '}
+                            <a>
+                            Create Group
+                            </a>
                         </Button>
                         <Button color="yellow" component={NextLink} href="/"  size="lg" >
-                            {' '}
+                            <a>
                             Join Private Group{' '}
+                            </a>
                         </Button>
                     </Group>
                 </Center>

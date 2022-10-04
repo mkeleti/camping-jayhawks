@@ -43,8 +43,9 @@ export function FooterCentered({ links }: FooterCenteredProps) {
             component={NextLink}
             href={link.link}
         >
-            {' '}
+            <a>
             {link.label}
+            </a>
         </Button>
     ))
 

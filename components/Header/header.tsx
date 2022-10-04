@@ -81,8 +81,9 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
             component={NextLink}
             href={link.link}
         >
-            {' '}
+            <a>
             {link.label}
+            </a>
         </Button>
     ))
 
