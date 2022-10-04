@@ -18,7 +18,7 @@ export default function Home() {
                     <GroupTable />
                 </Paper>
               </Card>
-              <Center mt="lg"><Button color="yellow" size="lg" > Create Group </Button></Center>
+              <Center mt="lg"><Button color="yellow" size="lg" href="/CreateGroup" component="a" > Create Group </Button></Center>
             </Container>
         </>
     )
