@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../utils/supabaseClient'
-import { Table, Text, Button } from '@mantine/core'
+import { Table, Center, Button, Loader} from '@mantine/core'
 
 export default function GroupTable() {
     const [groups, setGroups] = useState([])
@@ -17,9 +17,10 @@ export default function GroupTable() {
     }
 
     if (loading) {
-        return <Text>Loading...</Text>
+        return (
+            <Center><Loader size="xl"/></Center>
+        )
     }
-    
 
     return (
         <Table striped highlightOnHover withColumnBorders>
@@ -35,7 +36,11 @@ export default function GroupTable() {
                     <tr key={element.id}>
                         <td>{element.name}</td>
                         <td>{element.members}</td>
-                        <td><Button color="green" size='xs'>Join Group</Button></td>
+                        <td>
+                            <Button color="green" size="xs">
+                                Join Group
+                            </Button>
+                        </td>
                     </tr>
                 ))}
             </tbody>

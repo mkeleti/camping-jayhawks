@@ -1,48 +1,65 @@
-import { createStyles, Anchor, Group, ActionIcon, Button, SimpleGrid } from '@mantine/core';
-import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram } from '@tabler/icons';
-import { NextLink } from '@mantine/next';
-
+import {
+    createStyles,
+    Anchor,
+    Group,
+    ActionIcon,
+    Button,
+    SimpleGrid,
+} from '@mantine/core'
+import {
+    IconBrandTwitter,
+    IconBrandYoutube,
+    IconBrandInstagram,
+} from '@tabler/icons'
+import { NextLink } from '@mantine/next'
 
 const useStyles = createStyles((theme) => ({
-  footer: {
-  },
+    footer: {},
 
-  inner: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    inner: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
 
-
-    [theme.fn.smallerThan('sm')]: {
-      flexDirection: 'column',
+        [theme.fn.smallerThan('sm')]: {
+            flexDirection: 'column',
+        },
     },
-  },
 
-  links: {
-    [theme.fn.smallerThan('sm')]: {
-      marginTop: theme.spacing.xs,
-      marginBottom: theme.spacing.xs,
+    links: {
+        [theme.fn.smallerThan('sm')]: {
+            marginTop: theme.spacing.xs,
+            marginBottom: theme.spacing.xs,
+        },
     },
-  },
-}));
+}))
 
 interface FooterCenteredProps {
-  links: { link: string; label: string; }[];
+    links: { link: string; label: string }[]
 }
 
 export function FooterCentered({ links }: FooterCenteredProps) {
-  const { classes } = useStyles();
-  const items = links.map((link) => (
-      <Button className="button" color="blue" size="xs" component={NextLink} href={link.link} > {link.label}</Button>
-  ));
+    const { classes } = useStyles()
+    const items = links.map((link) => (
+        <Button
+            key={link.label}
+            className="button"
+            color="blue"
+            size="xs"
+            component={NextLink}
+            href={link.link}
+        >
+            {' '}
+            {link.label}
+        </Button>
+    ))
 
-  return (
-    <div className={classes.footer}>
-      <div className={classes.inner}>
-
-        <Group className={classes.links}>{items}</Group>
-        <SimpleGrid cols={1}>JayCamper</SimpleGrid>
-      </div>
-    </div>
-  );
+    return (
+        <div className={classes.footer}>
+            <div className={classes.inner}>
+                <Group className={classes.links}>{items}</Group>
+                <SimpleGrid cols={1}>JayCamper</SimpleGrid>
+            </div>
+        </div>
+    )
 }

@@ -15,7 +15,8 @@ import { createFormContext, useForm } from '@mantine/form'
 
 
 export default function CreateGroup() {
-    const [checked, setChecked] = useState(true)
+    // Once submitted data is stored in this state
+    const [data, setData] = useState({ groupName: '', public: true })
 
     const form = useForm({
         initialValues: {
@@ -32,7 +33,7 @@ export default function CreateGroup() {
                 <Card radius="md" shadow="sm" p="md" mt="lg">
                     <Paper>
                       <Text mb="lg">Enter all applicable information for your group, then click 'Submit' and you will be given your access code to invite your fellow members.</Text>
-                            <form onSubmit={form.onSubmit((values) => {console.log(values)})}>
+                            <form onSubmit={form.onSubmit((values) => {setData(values)})}>
                                 <TextInput
                                     label="Group Name"
                                     withAsterisk
