@@ -453,7 +453,7 @@
     "@mantine/ssr" "5.5.2"
     "@mantine/styles" "5.5.2"
 
-"@mantine/ssr@5.5.2":
+"@mantine/ssr@5.5.2", "@mantine/ssr@^5.5.2":
   version "5.5.2"
   resolved "https://registry.yarnpkg.com/@mantine/ssr/-/ssr-5.5.2.tgz#7567ca8ca97755e2723a076d9ef6d0ed9c225582"
   integrity sha512-+bxsKUz1C0xn2OVPNAXMJovUZVjdBqS8DUoXYq9lFbGBCZ9mS6+opxhV5TGNudkhDCghK4ID/BQZMVreBCvhDg==
@@ -2465,7 +2465,7 @@ next-tick@^1.1.0:
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.1.0.tgz#1836ee30ad56d67ef281b22bd199f709449b35eb"
   integrity sha512-CXdUiJembsNjuToQvxayPZF9Vqht7hewsvy2sOWafLvi2awflj9mOC6bHIg50orX8IJvWKY9wYQ/zB2kogPslQ==
 
-next@12.3.1:
+next@latest:
   version "12.3.1"
   resolved "https://registry.yarnpkg.com/next/-/next-12.3.1.tgz#127b825ad2207faf869b33393ec8c75fe61e50f1"
   integrity sha512-l7bvmSeIwX5lp07WtIiP9u2ytZMv7jIeB8iacR28PuUEFG5j0HGAPnMqyG5kbZNBG2H7tRsrQ4HCjuMOPnANZw==
