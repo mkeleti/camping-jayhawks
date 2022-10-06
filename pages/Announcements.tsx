@@ -1,16 +1,14 @@
 import {
-    Center,
-    Title,
-    Container,
-    Card,
-} from '@mantine/core'
-import Head from 'next/head'
-import type { NextPage } from 'next'
+  Center,
+  Title,
+  Container,
+  Card,
+} from '@mantine/core';
+import Head from 'next/head';
+import type { NextPage } from 'next';
 import Timeline from '../components/TwitterTimeline';
-const Announcements: NextPage = () => {
 
-
-    return (
+const Announcements: NextPage = () => (
         <>
             <Head>
                 <title>Announcements</title>
@@ -26,7 +24,6 @@ const Announcements: NextPage = () => {
                 </Container>
             </div>
         </>
-    )
-}
+);
 
 export default Announcements;

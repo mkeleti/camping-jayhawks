@@ -1,16 +1,16 @@
-import { Paper } from '@mantine/core'
-import { TwitterTimelineEmbed } from 'react-twitter-embed'
+import { Paper } from '@mantine/core';
+import { TwitterTimelineEmbed } from 'react-twitter-embed';
 
 export default function Timeline() {
-    return (
+  return (
         <Paper>
             <TwitterTimelineEmbed
-                sourceType="profile"
-                screenName="KUBBallCamping"
-                noHeader={true}
-                noFooter={true}
-                transparent={true}
+              sourceType="profile"
+              screenName="KUBBallCamping"
+              noHeader
+              noFooter
+              transparent
             />
         </Paper>
-    )
+  );
 }

@@ -1,18 +1,19 @@
-import { createGetInitialProps } from '@mantine/next'
-import Document, { Head, Html, Main, NextScript } from 'next/document'
+import { createGetInitialProps } from '@mantine/next';
+import Document, { Head, Html, Main, NextScript } from 'next/document';
 
-const getInitialProps = createGetInitialProps()
+const getInitialProps = createGetInitialProps();
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export default class _Document extends Document {
-    static getInitialProps = getInitialProps
+  static getInitialProps = getInitialProps;
 
-    render() {
-        return (
+  render() {
+    return (
             <Html>
                 <Head>
                     <link
-                        href="https://fonts.googleapis.com/css2?family=Poppins&display=optional"
-                        rel="stylesheet"
+                      href="https://fonts.googleapis.com/css2?family=Poppins&display=optional"
+                      rel="stylesheet"
                     />
                 </Head>
                 <body>
@@ -20,6 +21,6 @@ export default class _Document extends Document {
                     <NextScript />
                 </body>
             </Html>
-        )
-    }
+    );
+  }
 }

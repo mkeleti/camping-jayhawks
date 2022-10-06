@@ -1,34 +1,33 @@
-import { useState, useEffect } from 'react'
-import { supabase } from '../utils/supabaseClient'
-import { Table, Center, Button, Loader} from '@mantine/core'
-
+import { useState, useEffect } from 'react';
+import { Table, Center, Button, Loader } from '@mantine/core';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { PostgrestResponse } from '@supabase/postgrest-js/src';
+import { supabase } from '../utils/supabaseClient';
+import { definitions } from '../types/supabase';
 
 export default function GroupTable() {
-    const [groups, setGroups] = useState<group[]>([])
-    const [loading, setLoading] = useState(true)
-    
-    interface group {
-        id: number,
-        created_at: string,
-        name: string,
-        members: Array<string>,
-        public: boolean
-    }
+  const [groups, setGroups] = useState<Group[]>([]);
+  const [loading, setLoading] = useState(true);
 
+    type Group = definitions['groups'];
 
     useEffect(() => {
-        async function fetchGroups(): Promise<group[] | null> {
-            const { data } = await supabase.from('groups').select()
-            setLoading(false)
-            return data
+      async function fetchGroups(): Promise<Group[]> {
+        const response: PostgrestResponse<Group> = await supabase.from<'groups', Group>('groups').select();
+        if (response.data != null) {
+          return response.data;
         }
-        fetchGroups().then((data: group[]) => {setGroups(data)})
-    }, [])
+
+        return [];
+      }
+      fetchGroups().then((data) => { setGroups(data); });
+      setLoading(false);
+    }, []);
 
     if (loading) {
-        return (
-            <Center><Loader size="xl"/></Center>
-        )
+      return (
+            <Center><Loader size="xl" /></Center>
+      );
     }
 
     return (
@@ -54,5 +53,5 @@ export default function GroupTable() {
                 ))}
             </tbody>
         </Table>
-    )
+    );
 }
