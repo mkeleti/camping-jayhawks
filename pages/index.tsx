@@ -10,8 +10,9 @@ import {
 import GroupTable from '../components/GroupTable'
 import { NextLink  } from '@mantine/next';
 import Head from 'next/head'
+import { NextPage } from 'next';
 
-export default function Home() {
+const Home: NextPage = () => {
     return (
         <>
             <Head>
@@ -49,3 +50,5 @@ export default function Home() {
         </>
     )
 }
+
+export default Home;

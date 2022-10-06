@@ -5,9 +5,9 @@ import {
     Card,
 } from '@mantine/core'
 import Head from 'next/head'
-
+import type { NextPage } from 'next'
 import Timeline from '../components/TwitterTimeline';
-export default function Announcements() {
+const Announcements: NextPage = () => {
 
 
     return (
@@ -28,3 +28,5 @@ export default function Announcements() {
         </>
     )
 }
+
+export default Announcements;

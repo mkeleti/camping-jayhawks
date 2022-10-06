@@ -9,9 +9,8 @@ import {
 } from '@mantine/core'
 import { NextLink  } from '@mantine/next';
 import Head from 'next/head'
-
-
-export default function Camping() {
+import type { NextPage } from 'next'
+const Camping: NextPage = () => {
     return (
         <>
             <Head>
@@ -33,3 +32,5 @@ export default function Camping() {
         </>
     )
 }
+
+export default Camping;
