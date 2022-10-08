@@ -14,7 +14,7 @@ export default function GroupTable() {
 
     useEffect(() => {
       async function fetchGroups(): Promise<Group[]> {
-        const response: PostgrestResponse<Group> = await supabase.from<'groups', Group>('groups').select();
+        const response: PostgrestResponse<Group> = await supabase.from<'groups', Group>('groups').select().eq('public', true);
         if (response.data != null) {
           return response.data;
         }
@@ -46,7 +46,7 @@ export default function GroupTable() {
                         <td>{element.name}</td>
                         <td>{element.members}</td>
                         <td>
-                            <NextButton color="green" size="xs" title="Join Group" href="/" />
+                            <NextButton color="green" size="xs" title="Join Group" href={`/Groups/JoinPublic/${element.groupid}`} />
                         </td>
                     </tr>
                 ))}
