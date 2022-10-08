@@ -32,8 +32,8 @@ allow students to easily create camping groups for any sporting event. Built wit
 
 ## Credits
 
-Code: Michael Keleti
-Requirement Engineering: Mary Hayes
+- Development: Michael Keleti
+- Requirement Engineering: Mary Hayes
 
 ## License
 
