@@ -1,34 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Jaycamper
 
-## Getting Started
+This application provides a simple and intuitive interface for athletic departments and students alike. The main purpose of this app is to 
+allow students to easily create camping groups for any sporting event. Built with Next.js, deployed with vercel.
 
-First, run the development server:
+## Installation
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+1. Clone repo with `git clone https://github.com/mkeleti/camping-jayhawks.git`
+2. Navigate to repo directory with `cd camping-jayhawks`
+3. Run `yarn install` to install packages.
+4. All set :D
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Usage
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- `yarn dev` - Run Dev server on localhost:{port}
+- `yarn lint` - Lint your code with eslint
+- `yarn build` - Build optimized production
+- `yarn api-types` - Update api type definitions
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Contributing
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+1. Fork it!
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request :D
 
-## Learn More
+## History
 
-To learn more about Next.js, take a look at the following resources:
+1. Divised application with team - August 2022
+2. Released v1 after a few days work - September 2022
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Credits
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Code: Michael Keleti
+Requirement Engineering: Mary Hayes
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Apache License 2.0
