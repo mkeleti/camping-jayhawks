@@ -11,10 +11,10 @@ export default function GroupTable() {
   const [loading, setLoading] = useState(true);
 
     type Group = definitions['groups'];
-
+    type Public = { public: boolean };
     useEffect(() => {
       async function fetchGroups(): Promise<Group[]> {
-        const response: PostgrestResponse<Group> = await supabase.from<'groups', Group>('groups').select().eq('public', true);
+        const response: PostgrestResponse<Public> = await supabase.from<'groups', Public>('groups').select().eq('public', true);
         if (response.data != null) {
           return response.data;
         }
