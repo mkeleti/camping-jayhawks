@@ -7,4 +7,6 @@ module.exports = withBundleAnalyzer({
   eslint: {
     ignoreDuringBuilds: true,
   },
+  emotion: true,
+  swcMinify: true
 });
