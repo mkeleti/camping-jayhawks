@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import {
   Container,
@@ -10,19 +12,26 @@ import {
   Checkbox,
   Group,
   Text,
+  SimpleGrid,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import type { NextPage } from 'next';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { IconGripVertical } from '@tabler/icons';
+import { useQRCode } from 'next-qrcode';
 import { supabase } from '../../utils/supabaseClient';
 import { definitions } from '../../types/supabase';
+import NextButton from '../../components/NextButton';
 
 const CreateGroup: NextPage = () => {
-  // Once submitted data is stored in this state
+  const [notPrivate, setPrivate] = useState<boolean>(true);
+  const [Data, setData] = useState<string>('s');
+  const router = useRouter();
+  const { Canvas } = useQRCode();
+
   type Group = definitions['groups'];
   type Members = { name: string };
-  const router = useRouter();
+
   async function insertTable(values: { groupName: string; public: boolean, members: Members[] }) {
     const memberList = new Array<String>();
 
@@ -34,13 +43,20 @@ const CreateGroup: NextPage = () => {
       }
     });
 
-    await supabase
+    const data = await supabase
       .from<'groups', Group>('groups')
       .insert([
         { name: values.groupName, public: values.public, members: memberList }]);
-    router.push('/');
+    console.log(data);
+    if (values.public) {
+      router.push('/');
+    } else {
+      const data2 = await supabase.from<'groups', Group>('groups').select('groupid').eq('name', (`${values.groupName}`)).eq('public', 'false');
+      setPrivate(false);
+      setData(data2.data[0].groupid);
+    }
   }
-  // useForm hook handles form state and validation
+
   const form = useForm({
     initialValues: {
       groupName: '',
@@ -102,17 +118,46 @@ const CreateGroup: NextPage = () => {
                                       </Droppable>
                                       </DragDropContext>
 
-                                        <Group position="center" mt="md">
-                                          <Button onClick={() => form.insertListItem('members', { name: '' })}>
-                                            Add employee
+                                        <Group position="left" mt="md" ml="xl">
+                                          <Button size="sm" onClick={() => form.insertListItem('members', { name: '' })}>
+                                            Add Member
                                           </Button>
                                         </Group>
-                                <Group position="right" mt="md">
-                                    <Button type="submit">Submit</Button>
+                                <Group position="center" mt="md">
+                                    <Button size="lg" type="submit">Submit</Button>
                                 </Group>
                             </form>
                     </Paper>
                 </Card>
+                {notPrivate ? null :
+                  (<Card hidden={notPrivate} radius="md" shadow="sm" p="md" mt="lg">
+                  <Paper>
+                    <Center>
+                      <SimpleGrid cols={1}>
+                   <Center> <Text mb="lg">Your group has been created and is private. You can invite your members by sharing this access code with them.</Text></Center>
+                    <Center><Title size="xl">Access Code:</Title></Center>
+                    <Center><Title mb="md" size="sm">{`${Data}`}</Title></Center>
+                    <Center><Canvas
+                      text={`http://jaycamper.com/Groups/Private/${Data}`}
+                      options={{
+                        type: 'image/jpeg',
+                        quality: 0.3,
+                        level: 'M',
+                        margin: 3,
+                        scale: 4,
+                        width: 200,
+                        color: {
+                          dark: '#000000FF',
+                          light: '#FFFFFFFF',
+                        },
+                      }}
+                    />
+                    </Center>
+                   <Center> <NextButton size="lg" href="/" title="Return Home" /> </Center>
+                      </SimpleGrid>
+                    </Center>
+                  </Paper>
+                   </Card>)}
             </Container>
         </>
   );
