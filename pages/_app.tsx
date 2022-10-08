@@ -1,6 +1,7 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { MantineProvider } from '@mantine/core';
+import { NotificationsProvider } from '@mantine/notifications';
 import Layout from '../components/layout';
 
 export default function App(props: AppProps) {
@@ -113,9 +114,11 @@ export default function App(props: AppProps) {
                 }),
               }}
             >
+              <NotificationsProvider position="top-right" zIndex={2077}>
               <Layout>
                 <Component {...pageProps} />
               </Layout>
+              </NotificationsProvider>
             </MantineProvider>
         </>
   );

@@ -5,10 +5,12 @@ import {
   Title,
   Center,
   SimpleGrid,
+  Button,
 } from '@mantine/core';
 import Head from 'next/head';
 import type { NextPage } from 'next';
-import NextButton from '../components/NextButton';
+import { showNotification } from '@mantine/notifications';
+import GroupTable from '../components/GroupTable';
 
 const Camping: NextPage = () => (
         <>
@@ -21,10 +23,32 @@ const Camping: NextPage = () => (
             <Container>
                 <Card shadow="sm" mt="lg" radius="lg">
                     <Paper>
-                        <SimpleGrid cols={2}>
-                            <NextButton href="/" title="Roll Call" color="green" />
-                            <NextButton href="/" title="Suspend" color="green" />
+                        <SimpleGrid cols={2} mb="xl">
+                            <Button
+                              color="green"
+                              onClick={() => {
+                                showNotification({
+                                  autoClose: 5000,
+                                  title: 'Roll Called!',
+                                  message: 'Group Members have been notified of Roll Call.',
+                                });
+                              }}
+                            >Roll Call
+                            </Button>
+                            <Button
+                              color="green"
+                              onClick={() => {
+                                showNotification({
+                                  autoClose: 5000,
+                                  color: 'pink',
+                                  title: 'Roll Call Suspended!',
+                                  message: 'Roll Call has been suspended.',
+                                });
+                              }}
+                            >Suspend Call
+                            </Button>
                         </SimpleGrid>
+                        <GroupTable />
                     </Paper>
                 </Card>
             </Container>

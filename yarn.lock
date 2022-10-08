@@ -429,7 +429,7 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@mantine/core@5.5.4":
+"@mantine/core@^5.5.4":
   version "5.5.4"
   resolved "https://registry.yarnpkg.com/@mantine/core/-/core-5.5.4.tgz#afe31b8d5c644e856048027e75155eb7ab978661"
   integrity sha512-N0k8vBxuJOAwfchxd8gr1HXjsSw1HumQR9WR2OVCHmRR84ur2VniRB8iN4pCYSvnIXjUqpN1rzfnmAYTTogS+A==
@@ -448,7 +448,7 @@
     fast-deep-equal "^3.1.3"
     klona "^2.0.5"
 
-"@mantine/hooks@5.5.4":
+"@mantine/hooks@^5.5.4":
   version "5.5.4"
   resolved "https://registry.yarnpkg.com/@mantine/hooks/-/hooks-5.5.4.tgz#5b7f14dfffba4f59aed21ee6bccf336a438f96a3"
   integrity sha512-4lPIcZgoMkq+GCILN8CDTVxYzsE/Gfi6ICjHhPZU1Ufmw0mftpjTQhLx3+TFMtBlqnamgBia2ZS1o2BpvTLazA==
@@ -461,7 +461,7 @@
     "@mantine/ssr" "5.5.4"
     "@mantine/styles" "5.5.4"
 
-"@mantine/notifications@5.5.4":
+"@mantine/notifications@^5.5.4":
   version "5.5.4"
   resolved "https://registry.yarnpkg.com/@mantine/notifications/-/notifications-5.5.4.tgz#da06b82de4b6a757ab4fef76bf14b0a73e66a14a"
   integrity sha512-icX+uhGE+5DmZFPfcxLdjetyJhDzy1HtDT+F4Z898EJoFasHZZrd9dcOpc9wxESe73aHR1UsiEsJQz3wllKqUg==
