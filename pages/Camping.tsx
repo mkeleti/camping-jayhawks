@@ -5,11 +5,10 @@ import {
   Title,
   Center,
   SimpleGrid,
-  Button,
 } from '@mantine/core';
-import { NextLink } from '@mantine/next';
 import Head from 'next/head';
 import type { NextPage } from 'next';
+import NextButton from '../components/NextButton';
 
 const Camping: NextPage = () => (
         <>
@@ -23,8 +22,8 @@ const Camping: NextPage = () => (
                 <Card shadow="sm" mt="lg" radius="lg">
                     <Paper>
                         <SimpleGrid cols={2}>
-                            <Button component={NextLink} href="/" color="green">Roll Call</Button>
-                            <Button component={NextLink} href="/" color="yellow">Suspend</Button>
+                            <NextButton href="/" title="Roll Call" color="green" />
+                            <NextButton href="/" title="Suspend" color="green" />
                         </SimpleGrid>
                     </Paper>
                 </Card>

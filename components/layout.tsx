@@ -6,6 +6,7 @@ import {
   useMantineTheme,
 } from '@mantine/core';
 
+import React from 'react';
 import { HeaderSimple } from './Header/header';
 import { FooterCentered } from './Footer/footer';
 
@@ -13,7 +14,11 @@ const links = [{ link: '/', label: 'Groups' },
   { link: '/Camping', label: 'Camping' },
   { link: '/Announcements', label: 'Announcements' },
 ];
-export default function Layout({ children }) {
+interface Props {
+  children: React.ReactNode;
+}
+
+const Layout: React.FC<Props> = ({ children }) => {
   const theme = useMantineTheme();
 
   return (
@@ -44,4 +49,6 @@ export default function Layout({ children }) {
             <main>{children}</main>
         </AppShell>
   );
-}
+};
+
+export default Layout;

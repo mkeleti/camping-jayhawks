@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Table, Center, Button, Loader } from '@mantine/core';
+import { Table, Center, Loader } from '@mantine/core';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { PostgrestResponse } from '@supabase/postgrest-js/src';
 import { supabase } from '../utils/supabaseClient';
 import { definitions } from '../types/supabase';
+import NextButton from './NextButton';
 
 export default function GroupTable() {
   const [groups, setGroups] = useState<Group[]>([]);
@@ -45,9 +46,7 @@ export default function GroupTable() {
                         <td>{element.name}</td>
                         <td>{element.members}</td>
                         <td>
-                            <Button color="green" size="xs">
-                                Join Group
-                            </Button>
+                            <NextButton color="green" size="xs" title="Join Group" href="/" />
                         </td>
                     </tr>
                 ))}

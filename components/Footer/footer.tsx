@@ -1,11 +1,10 @@
 import {
   createStyles,
   Group,
-  Button,
   SimpleGrid,
 } from '@mantine/core';
 
-import { NextLink } from '@mantine/next';
+import NextButton from '../NextButton';
 
 const useStyles = createStyles((theme) => ({
   footer: {},
@@ -35,18 +34,13 @@ interface FooterCenteredProps {
 export function FooterCentered({ links }: FooterCenteredProps) {
   const { classes } = useStyles();
   const items = links.map((link) => (
-        <Button
+        <NextButton
           key={link.label}
-          className="button"
+          title={link.label}
           color="blue"
           size="xs"
-          component={NextLink}
           href={link.link}
-        >
-
-            {link.label}
-
-        </Button>
+        />
   ));
 
   return (

@@ -5,10 +5,9 @@ import {
   Group,
   Burger,
   Text,
-  Button,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { NextLink } from '@mantine/next';
+import NextButton from '../NextButton';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -74,15 +73,9 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
   const { classes } = useStyles();
 
   const items = links.map((link) => (
-        <Button
-          color="blue"
-          key={link.label}
-          className="button"
-          component={NextLink}
-          href={link.link}
-        >
-            {link.label}
-        </Button>
+    <>
+        <NextButton color="blue" key={link.label} href={link.link} title={link.label} />
+    </>
   ));
 
   return (

@@ -4,13 +4,12 @@ import {
   Title,
   Center,
   Card,
-  Button,
   Group,
 } from '@mantine/core';
-import { NextLink } from '@mantine/next';
 import Head from 'next/head';
 import { NextPage } from 'next';
 import GroupTable from '../components/GroupTable';
+import NextButton from '../components/NextButton';
 
 const Home: NextPage = () => (
         <>
@@ -28,17 +27,8 @@ const Home: NextPage = () => (
                 </Card>
                 <Center mt="lg">
                     <Group>
-                        <Button
-                          color="yellow"
-                          size="lg"
-                          component={NextLink}
-                          href="Groups/CreateGroup"
-                        >
-                            Create Group
-                        </Button>
-                        <Button color="yellow" component={NextLink} href="/" size="lg">
-                            Join Private Group{' '}
-                        </Button>
+                        <NextButton href="/Groups/CreateGroup" title="Create Group" size="lg" color="yellow" />
+                        <NextButton href="/" title="Join Private Group" size="lg" color="yellow" />
                     </Group>
                 </Center>
             </Container>
