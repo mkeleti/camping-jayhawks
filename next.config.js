@@ -4,5 +4,8 @@ module.exports = {
     ignoreDuringBuilds: true,
   },
   emotion: true,
-  swcMinify: true
+  swcMinify: true,
+  typescript: {
+    ignoreBuildErrors: true,
+  }
 }
