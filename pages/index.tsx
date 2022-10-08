@@ -28,7 +28,7 @@ const Home: NextPage = () => (
                 <Center mt="lg">
                     <Group>
                         <NextButton href="/Groups/CreateGroup" title="Create Group" size="lg" color="yellow" />
-                        <NextButton href="/" title="Join Private Group" size="lg" color="yellow" />
+                        <NextButton href="/Groups/Private/Join" title="Join Private Group" size="lg" color="yellow" />
                     </Group>
                 </Center>
             </Container>

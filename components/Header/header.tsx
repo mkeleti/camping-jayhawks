@@ -73,9 +73,7 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
   const { classes } = useStyles();
 
   const items = links.map((link) => (
-    <>
-        <NextButton color="blue" key={link.label} href={link.link} title={link.label} />
-    </>
+        <NextButton color="blue" key={`${link.label}-`} href={link.link} title={link.label} />
   ));
 
   return (

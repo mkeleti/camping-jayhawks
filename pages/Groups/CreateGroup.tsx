@@ -21,8 +21,9 @@ import { definitions } from '../../types/supabase';
 const CreateGroup: NextPage = () => {
   // Once submitted data is stored in this state
   type Group = definitions['groups'];
+  type Members = { name: string };
   const router = useRouter();
-  async function insertTable(values: { groupName: string; public: boolean, members: JSON[] }) {
+  async function insertTable(values: { groupName: string; public: boolean, members: Members[] }) {
     const memberList = new Array<String>();
 
     values.members.forEach((element, index) => {
@@ -36,9 +37,7 @@ const CreateGroup: NextPage = () => {
     await supabase
       .from<'groups', Group>('groups')
       .insert([
-        // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        { name: values.groupName, public: values.public, members: memberList },
-      ]);
+        { name: values.groupName, public: values.public, members: memberList }]);
     router.push('/');
   }
   // useForm hook handles form state and validation

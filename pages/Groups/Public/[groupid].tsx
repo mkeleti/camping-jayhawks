@@ -7,27 +7,27 @@ import {
   Paper,
   Button,
   TextInput,
-  Checkbox,
   Group,
   Text,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import type { NextPage } from 'next';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { PostgrestResponse } from '@supabase/postgrest-js/dist/module/types';
 import { supabase } from '../../../utils/supabaseClient';
 import { definitions } from '../../../types/supabase';
 
-const CreateGroup: NextPage = () => {
+const PublicJoin: NextPage = () => {
   // Once submitted data is stored in this state
   type Group = definitions['groups'];
   const router = useRouter();
   const { groupid } = router.query;
   type Members = {
-    members?: string[] | undefined;
+    pop(): string;
+    push(arg0: string): unknown;
+    members?: string[] | unknown;
   };
   async function fetchMembers(): Promise<Members | null> {
-    const response: PostgrestResponse<Members> = await supabase.from<'groups', Members>('groups').select('members').eq('groupid', groupid);
+    const response = await supabase.from<'groups', Group>('groups').select('members').eq('groupid', groupid);
     if (response.data != null) {
       return response.data[0];
     }
@@ -35,22 +35,19 @@ const CreateGroup: NextPage = () => {
   }
 
   async function updateTable(values: { name: string }) {
-    let memberlist: string[] | Members;
+    let memberlist;
     if (await fetchMembers() != null) {
       memberlist = await fetchMembers();
       memberlist = memberlist.members;
-      console.log(memberlist);
       const updatemember = memberlist.pop();
       memberlist.push(`${updatemember}, `);
-      console.log(memberlist);
     } else {
       memberlist = new Array<string>();
     }
     memberlist.push(values.name);
-    console.log(memberlist);
     await supabase
       .from<'groups', Group>('groups')
-      .update<Members>({ members: memberlist })
+      .update({ members: memberlist })
       .eq('groupid', groupid);
     router.push('/');
   }
@@ -65,11 +62,11 @@ const CreateGroup: NextPage = () => {
         <>
             <Container>
                 <Center>
-                    <Title>Join group</Title>
+                    <Title>Join Public Group</Title>
                 </Center>
                 <Card radius="md" shadow="sm" p="md" mt="lg">
                     <Paper>
-                      <Text mb="lg">Enter your name to join a group.</Text>
+                      <Text mb="lg">Enter your name to join the public group.</Text>
                             <form onSubmit={form.onSubmit((values) => { updateTable(values); })}>
                                 <TextInput
                                   label="Your Name"
@@ -89,4 +86,4 @@ const CreateGroup: NextPage = () => {
   );
 };
 
-export default CreateGroup;
+export default PublicJoin;

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Table, Center, Loader } from '@mantine/core';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { PostgrestResponse } from '@supabase/postgrest-js/src';
 import { supabase } from '../utils/supabaseClient';
 import { definitions } from '../types/supabase';
 import NextButton from './NextButton';
@@ -11,11 +10,11 @@ export default function GroupTable() {
   const [loading, setLoading] = useState(true);
 
     type Group = definitions['groups'];
-    type Public = { public: boolean };
+
     useEffect(() => {
       async function fetchGroups(): Promise<Group[]> {
-        const response: PostgrestResponse<Public> = await supabase.from<'groups', Public>('groups').select().eq('public', true);
-        if (response.data != null) {
+        const response = await supabase.from<'groups', Group>('groups').select().eq('public', true);
+        if (Array.isArray(response.data) && response.data != null) {
           return response.data;
         }
 
@@ -46,7 +45,7 @@ export default function GroupTable() {
                         <td>{element.name}</td>
                         <td>{element.members}</td>
                         <td>
-                            <NextButton color="green" size="xs" title="Join Group" href={`/Groups/JoinPublic/${element.groupid}`} />
+                            <NextButton color="green" size="xs" title="Join Group" href={`/Groups/Public/${element.groupid}`} />
                         </td>
                     </tr>
                 ))}
