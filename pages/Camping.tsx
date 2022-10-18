@@ -45,7 +45,7 @@ const Camping: NextPage = () => (
                                   message: 'Roll Call has been suspended.',
                                 });
                               }}
-                            >Suspend Call
+                            >Suspend
                             </Button>
                         </SimpleGrid>
                         <GroupTable />

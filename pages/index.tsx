@@ -28,16 +28,28 @@ const Home: NextPage = () => (
                 </Card>
                 <Center mt="lg">
                     <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
+                    <Center>
                     <Group>
+                        <Center>
                         <NextButton href="/Groups/CreateGroup" title="Create Group" size="lg" color="yellow" />
+                        </Center>
+                        <Center>
                         <NextButton href="/Groups/Private/Join" title="Join Private Group" size="lg" color="yellow" />
+                        </Center>
                     </Group>
+                    </Center>
                     </MediaQuery>
                     <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
+                    <Center>
                     <Group>
+                        <Center>
                         <NextButton href="/Groups/CreateGroup" title="Create Group" size="sm" color="yellow" />
+                        </Center>
+                        <Center>
                         <NextButton href="/Groups/Private/Join" title="Join Private Group" size="sm" color="yellow" />
+                        </Center>
                     </Group>
+                    </Center>
                     </MediaQuery>
                 </Center>
             </Container>

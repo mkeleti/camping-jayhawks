@@ -33,7 +33,7 @@ const Layout: React.FC<Props> = ({ children }) => {
           }}
           footer={
                 <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
-                    <Footer p="xs" height="30">
+                    <Footer p="xs" height="80">
                         <FooterCentered links={links} />
                     </Footer>
                 </MediaQuery>
