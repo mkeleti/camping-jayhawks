@@ -15,7 +15,7 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import type { NextPage } from 'next';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable, resetServerContext } from 'react-beautiful-dnd';
 import { IconGripVertical } from '@tabler/icons';
 import { useQRCode } from 'next-qrcode';
 import { supabase } from '../../utils/supabaseClient';
@@ -62,13 +62,14 @@ const CreateGroup: NextPage = () => {
     },
   });
 
-  const fields = form.values.members.map((_, index) => (
+  const fields = form.values.members.map((name, index) => (
     <Draggable key={index} index={index} draggableId={index.toString()}>
       {(provided) => (
         <Group ref={provided.innerRef} mt="xs" {...provided.draggableProps}>
           <Center {...provided.dragHandleProps}>
             <IconGripVertical size={18} />
           </Center>
+          { resetServerContext() }
           <TextInput placeholder="John Doe" {...form.getInputProps(`members.${index}.name`)} />
         </Group>
       )}
