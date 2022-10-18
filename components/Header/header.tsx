@@ -5,6 +5,7 @@ import {
   Group,
   Burger,
   Text,
+  Image
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import NextButton from '../NextButton';
@@ -79,7 +80,7 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
   return (
         <Header height={60} mb={120}>
             <Container className={classes.header}>
-                <Text> JayCamper </Text>
+                <Image src="logo.png" width={180} />
                 <Group spacing={5} className={classes.links}>
                     {items}
                 </Group>

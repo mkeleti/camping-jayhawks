@@ -1,7 +1,9 @@
 import {
+  Center,
   createStyles,
   Group,
   SimpleGrid,
+  Image,
 } from '@mantine/core';
 
 import NextButton from '../NextButton';
@@ -46,8 +48,8 @@ export function FooterCentered({ links }: FooterCenteredProps) {
   return (
         <div className={classes.footer}>
             <div className={classes.inner}>
-                <Group className={classes.links}>{items}</Group>
-                <SimpleGrid cols={1}>JayCamper</SimpleGrid>
+            <Center><Group className={classes.links}>{items}</Group></Center>
+                <SimpleGrid cols={1}><Image src="logo.png" width={100} /></SimpleGrid>
             </div>
         </div>
   );
