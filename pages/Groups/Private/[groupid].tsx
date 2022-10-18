@@ -29,6 +29,7 @@ const PrivateJoin: NextPage = () => {
   async function fetchMembers(): Promise<Members[] | null> {
     const response = await supabase.from<'groups', Group>('groups').select('members').eq('groupid', groupid);
     if (Array.isArray(response.data)) {
+      // @ts-ignore
       return response.data[0];
     }
     return null;
@@ -47,6 +48,7 @@ const PrivateJoin: NextPage = () => {
     memberlist.push(values.name);
     await supabase
       .from<'groups', Group>('groups')
+    // @ts-ignore
       .update({ members: memberlist })
       .eq('groupid', groupid);
     router.push('/');

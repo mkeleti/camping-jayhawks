@@ -4,10 +4,11 @@ import {
   Container,
   Group,
   Burger,
-  Image,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import Image from 'next/image';
 import NextButton from '../NextButton';
+import logo from '../../public/logo.png';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -79,7 +80,7 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
   return (
         <Header height={60} mb={120}>
             <Container className={classes.header}>
-                <Image src="logo.png" width={180} />
+                <Image src={logo} width={180} height={64} quality={100} />
                 <Group spacing={5} className={classes.links}>
                     {items}
                 </Group>

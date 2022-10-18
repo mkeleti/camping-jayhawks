@@ -3,10 +3,10 @@ import {
   createStyles,
   Group,
   SimpleGrid,
-  Image,
 } from '@mantine/core';
-
+import Image from 'next/image';
 import NextButton from '../NextButton';
+import logo from '../../public/logo.png';
 
 const useStyles = createStyles((theme) => ({
   footer: {},
@@ -49,7 +49,7 @@ export function FooterCentered({ links }: FooterCenteredProps) {
         <div className={classes.footer}>
             <div className={classes.inner}>
             <Center><Group className={classes.links}>{items}</Group></Center>
-                <SimpleGrid cols={1}><Image src="logo.png" width={100} /></SimpleGrid>
+                <SimpleGrid cols={1}><Image src={logo} width={100} height={35.6} /></SimpleGrid>
             </div>
         </div>
   );

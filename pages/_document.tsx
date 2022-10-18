@@ -15,6 +15,7 @@ export default class _Document extends Document {
                       href="https://fonts.googleapis.com/css2?family=Poppins&display=optional"
                       rel="stylesheet"
                     />
+                    <link rel="icon" href="/favicon.png" />
                 </Head>
                 <body>
                     <Main />

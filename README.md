@@ -35,6 +35,11 @@ allow students to easily create camping groups for any sporting event. Built wit
 - Development: Michael Keleti
 - Requirement Engineering: Mary Hayes
 
+## Tech Stack
+
+- Frontend: Next.js, React, Mantine.dev
+- Backend: Node.js, Supabase
+
 ## License
 
 Apache License 2.0

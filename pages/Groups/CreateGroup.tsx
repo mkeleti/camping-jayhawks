@@ -41,17 +41,15 @@ const CreateGroup: NextPage = () => {
         memberList.push(`${element.name}`);
       }
     });
-
     const data = await supabase
       .from<'groups', Group>('groups')
-      .insert([
+      .insert([// @ts-ignore
         { name: values.groupName, public: values.public, members: memberList }]);
-    console.log(data);
     if (values.public) {
       router.push('/');
     } else {
       const data2 = await supabase.from<'groups', Group>('groups').select('groupid').eq('name', (`${values.groupName}`)).eq('public', 'false');
-      setPrivate(false);
+      setPrivate(false);// @ts-ignore
       setData(data2.data[0].groupid);
     }
   }
