@@ -15,7 +15,7 @@ import NextButton from '../components/NextButton';
 const Home: NextPage = () => (
         <>
             <Head>
-                <title>Groups</title>
+                <title>JayCamper</title>
             </Head>
             <Container>
                 <Center>

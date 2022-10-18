@@ -4,8 +4,7 @@ import {
   Container,
   Group,
   Burger,
-  Text,
-  Image
+  Image,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import NextButton from '../NextButton';

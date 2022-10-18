@@ -30,7 +30,7 @@ const Join: NextPage = () => {
         <>
             <Container>
                 <Center>
-                    <Title>Group Passcode</Title>
+                    <Title>Join Private Group</Title>
                 </Center>
                 <Card radius="md" shadow="sm" p="md" mt="lg">
                     <Paper>
