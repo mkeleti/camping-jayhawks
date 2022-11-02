@@ -30,10 +30,6 @@ allow students to easily create camping groups for any sporting event. Built wit
 1. Divised application with team - August 2022
 2. Released v1 after a few days work - September 2022
 
-## Credits
-
-- Development: Michael Keleti
-- Requirement Engineering: Mary Hayes
 
 ## Tech Stack
 
