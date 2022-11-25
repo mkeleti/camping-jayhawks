@@ -18,14 +18,15 @@ import type { NextPage } from 'next';
 import { DragDropContext, Droppable, Draggable, resetServerContext } from 'react-beautiful-dnd';
 import { IconGripVertical } from '@tabler/icons';
 import { useQRCode } from 'next-qrcode';
-import { supabase } from '../../utils/supabaseClient';
 import { definitions } from '../../types/supabase';
 import NextButton from '../../components/NextButton';
+import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
 
 const CreateGroup: NextPage = () => {
   const [notPrivate, setPrivate] = useState<boolean>(true);
   const [Data, setData] = useState<string>('s');
   const router = useRouter();
+  const supabase = useSupabaseClient();
   const { Canvas } = useQRCode();
 
   type Group = definitions['groups'];

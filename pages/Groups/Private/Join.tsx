@@ -14,6 +14,7 @@ import { useForm } from '@mantine/form';
 import type { NextPage } from 'next';
 import { definitions } from '../../../types/supabase';
 
+
 const Join: NextPage = () => {
   // Once submitted data is stored in this state
   type Group = definitions['groups'];

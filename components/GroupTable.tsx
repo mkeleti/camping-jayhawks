@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Table, Center, Loader } from '@mantine/core';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { supabase } from '../utils/supabaseClient';
 import { definitions } from '../types/supabase';
 import NextButton from './NextButton';
+import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
 
 export default function GroupTable() {
   const [groups, setGroups] = useState<Group[]>([]);
   const [loading, setLoading] = useState(true);
+  const user = useUser();
+  const supabase = useSupabaseClient();
 
     type Group = definitions['groups'];
 
@@ -45,7 +47,7 @@ export default function GroupTable() {
                         <td>{element.name}</td>
                         <td>{element.members}</td>
                         <td>
-                            <NextButton color="green" size="xs" title="Join Group" href={`/Groups/Public/${element.groupid}`} />
+                            {!user ? (<NextButton disabled color="green" size="xs" title="Join Group" href={`/Groups/Public/${element.groupid}`} />) : (<NextButton color="green" size="xs" title="Join Group" href={`/Groups/Private/${element.groupid}`} />)}
                         </td>
                     </tr>
                 ))}
