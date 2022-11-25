@@ -9,11 +9,12 @@ type ButtonProps = {
   color?: DefaultMantineColor | undefined;
   size?: MantineSize | undefined;
   title: string;
+  disabled?: boolean | undefined;
 };
 
 const NextButton = (props: ButtonProps) => (
         <Link href={props.href} passHref>
-            <Button component="a" color={props.color} size={props.size}>{props.title}</Button>
+          {props.disabled ? (<Button component="a" disabled color={props.color} size={props.size}>{props.title}</Button>) : (<Button component="a" color={props.color} size={props.size}>{props.title}</Button>)}
         </Link>
 );
 

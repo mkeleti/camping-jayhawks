@@ -13,13 +13,14 @@ import {
 import { useForm } from '@mantine/form';
 import type { NextPage } from 'next';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { supabase } from '../../../utils/supabaseClient';
 import { definitions } from '../../../types/supabase';
+import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
 
 const PublicJoin: NextPage = () => {
   // Once submitted data is stored in this state
   type Group = definitions['groups'];
   const router = useRouter();
+  const supabase = useSupabaseClient();
   const { groupid } = router.query;
   type Members = {
     pop(): string;

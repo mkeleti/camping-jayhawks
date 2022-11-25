@@ -9,6 +9,7 @@ import { useDisclosure } from '@mantine/hooks';
 import Image from 'next/image';
 import NextButton from '../NextButton';
 import logo from '../../public/logo.png';
+import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -73,6 +74,7 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
   const [opened, { toggle }] = useDisclosure(false);
   const { classes } = useStyles();
 
+  const user = useUser();
   const items = links.map((link) => (
         <NextButton color="blue" key={`${link.label}-`} href={link.link} title={link.label} />
   ));
@@ -91,7 +93,9 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
                   className={classes.burger}
                   size="sm"
                 />
+                {!user ? (<NextButton color="blue"  href={"/login"} title={"Login"} />) : (<NextButton color="green"  href={"/login"} title={"Sign Out"} />)}
             </Container>
+            
         </Header>
   );
 }
