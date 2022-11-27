@@ -47,7 +47,7 @@ export default function GroupTable() {
                         <td>{element.name}</td>
                         <td>{element.members}</td>
                         <td>
-                            {!user ? (<NextButton disabled color="green" size="xs" title="Join Group" href={`/Groups/Public/${element.groupid}`} />) : (<NextButton color="green" size="xs" title="Join Group" href={`/Groups/Private/${element.groupid}`} />)}
+                            {!user ? (<NextButton disabled color="green" size="xs" title="Join Group" href={`/Groups/Public/${element.groupid}`} />) : (<NextButton color="green" size="xs" title="Join Group" href={`/Groups/Public/${element.groupid}`} />)}
                         </td>
                     </tr>
                 ))}

@@ -1,6 +1,6 @@
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
-import { SupabaseClient, User } from '@supabase/supabase-js';
+import { SupabaseClient, User, Provider } from '@supabase/supabase-js';
 import { Text, Button, Center, Grid } from '@mantine/core';
 import { supabase } from '../utils/supabaseClient';
 import { useEffect, useState } from 'react';
@@ -57,6 +57,7 @@ export default function AuthBasic() {
     <Auth.UserContextProvider supabaseClient={supabaseClient}>
       <Container supabaseClient={supabaseClient}>
         <Auth
+          providers={["github"]}
           supabaseClient={supabaseClient}
           redirectTo="https://jaycamper.com"
           appearance={{ theme: ThemeSupa }}

@@ -4,6 +4,7 @@ import {
   Container,
   Group,
   Burger,
+  Center,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import Image from 'next/image';
@@ -81,12 +82,13 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
 
   return (
         <Header height={60} mb={120}>
-            <Container className={classes.header}>
+            <Container fluid className={classes.header}>
                 <Image src={logo} width={180} height={64} quality={100} />
+                <Center>
                 <Group spacing={5} className={classes.links}>
                     {items}
                 </Group>
-
+                </Center>
                 <Burger
                   opened={opened}
                   onClick={toggle}
