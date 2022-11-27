@@ -32,7 +32,7 @@ const CreateGroup: NextPage = () => {
   type Group = definitions['groups'];
   type Members = { name: string };
 
-  async function insertTable(values: { groupName: string; public: boolean, members: Members[] }) {
+  async function insertTable(values: { groupName: string; public: boolean; members: Members[] }) {
     const memberList = new Array<String>();
 
     values.members.forEach((element, index) => {
@@ -42,15 +42,19 @@ const CreateGroup: NextPage = () => {
         memberList.push(`${element.name}`);
       }
     });
-    const data = await supabase
-      .from<'groups', Group>('groups')
-      .insert([// @ts-ignore
-        { name: values.groupName, public: values.public, members: memberList }]);
+    const data = await supabase.from<'groups', Group>('groups').insert([
+      // @ts-ignore
+      { name: values.groupName, public: values.public, members: memberList },
+    ]);
     if (values.public) {
       router.push('/');
     } else {
-      const data2 = await supabase.from<'groups', Group>('groups').select('groupid').eq('name', (`${values.groupName}`)).eq('public', 'false');
-      setPrivate(false);// @ts-ignore
+      const data2 = await supabase
+        .from<'groups', Group>('groups')
+        .select('groupid')
+        .eq('name', `${values.groupName}`)
+        .eq('public', 'false');
+      setPrivate(false); // @ts-ignore
       setData(data2.data[0].groupid);
     }
   }
@@ -70,7 +74,7 @@ const CreateGroup: NextPage = () => {
           <Center {...provided.dragHandleProps}>
             <IconGripVertical size={18} />
           </Center>
-          { resetServerContext() }
+          {resetServerContext()}
           <TextInput placeholder="John Doe" {...form.getInputProps(`members.${index}.name`)} />
         </Group>
       )}
@@ -78,65 +82,85 @@ const CreateGroup: NextPage = () => {
   ));
 
   return (
-        <>
-            <Container>
-                <Center>
-                    <Title>Create Group</Title>
-                </Center>
-                <Card radius="md" shadow="sm" p="md" mt="lg">
-                    <Paper>
-                      <Text mb="lg">Enter all applicable information for your group, then click Submit and you will be given your access code to invite your fellow members.</Text>
-                            <form onSubmit={form.onSubmit((values) => { insertTable(values); })}>
-                                <TextInput
-                                  label="Group Name"
-                                  withAsterisk
-                                  placeholder="Lottery Winners!"
-                                  size="md"
-                                  description="This is the name of your group"
-                                  {...form.getInputProps('groupName')}
-                                />
-                                <Checkbox
-                                  pt="lg"
-                                  size="md"
-                                  mt="lg"
-                                  {...form.getInputProps('public', { type: 'checkbox' })}
-                                  label="Public Group?"
-                                />
-                                      <DragDropContext
-                                        onDragEnd={({ destination, source }) =>
-                                          form.reorderListItem('members', { from: source.index, to: destination.index })
-                                        }
-                                      >
-                                      <Droppable droppableId="dnd-list" direction="vertical">
-                                        {(provided) => (
-                                          <div {...provided.droppableProps} ref={provided.innerRef}>
-                                            {fields}
-                                            {provided.placeholder}
-                                          </div>
-                                        )}
-                                      </Droppable>
-                                      </DragDropContext>
+    <>
+      <Container>
+        <Center>
+          <Title>Create Group</Title>
+        </Center>
+        <Card radius="md" shadow="sm" p="md" mt="lg">
+          <Paper>
+            <Text mb="lg">
+              Enter all applicable information for your group, then click Submit and you will be
+              given your access code to invite your fellow members.
+            </Text>
+            <form
+              onSubmit={form.onSubmit((values) => {
+                insertTable(values);
+              })}
+            >
+              <TextInput
+                label="Group Name"
+                withAsterisk
+                placeholder="Lottery Winners!"
+                size="md"
+                description="This is the name of your group"
+                {...form.getInputProps('groupName')}
+              />
+              <Checkbox
+                pt="lg"
+                size="md"
+                mt="lg"
+                {...form.getInputProps('public', { type: 'checkbox' })}
+                label="Public Group?"
+              />
+              <DragDropContext
+                onDragEnd={({ destination, source }) =>
+                  form.reorderListItem('members', { from: source.index, to: destination.index })
+                }
+              >
+                <Droppable droppableId="dnd-list" direction="vertical">
+                  {(provided) => (
+                    <div {...provided.droppableProps} ref={provided.innerRef}>
+                      {fields}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </DragDropContext>
 
-                                        <Group position="left" mt="md" ml="xl">
-                                          <Button size="sm" onClick={() => form.insertListItem('members', { name: '' })}>
-                                            Add Member
-                                          </Button>
-                                        </Group>
-                                <Group position="center" mt="md">
-                                    <Button size="lg" type="submit">Submit</Button>
-                                </Group>
-                            </form>
-                    </Paper>
-                </Card>
-                {notPrivate ? null :
-                  (<Card hidden={notPrivate} radius="md" shadow="sm" p="md" mt="lg">
-                  <Paper>
-                    <Center>
-                      <SimpleGrid cols={1}>
-                   <Center> <Text mb="lg">Your group has been created and is private. You can invite your members by sharing this access code with them.</Text></Center>
-                    <Center><Title size="xl">Access Code:</Title></Center>
-                    <Center><Title mb="md" size="sm">{`${Data}`}</Title></Center>
-                    <Center><Canvas
+              <Group position="left" mt="md" ml="xl">
+                <Button size="sm" onClick={() => form.insertListItem('members', { name: '' })}>
+                  Add Member
+                </Button>
+              </Group>
+              <Group position="center" mt="md">
+                <Button size="lg" type="submit">
+                  Submit
+                </Button>
+              </Group>
+            </form>
+          </Paper>
+        </Card>
+        {notPrivate ? null : (
+          <Card hidden={notPrivate} radius="md" shadow="sm" p="md" mt="lg">
+            <Paper>
+              <Center>
+                <SimpleGrid cols={1}>
+                  <Center>
+                    {' '}
+                    <Text mb="lg">
+                      Your group has been created and is private. You can invite your members by
+                      sharing this access code with them.
+                    </Text>
+                  </Center>
+                  <Center>
+                    <Title size="xl">Access Code:</Title>
+                  </Center>
+                  <Center>
+                    <Title mb="md" size="sm">{`${Data}`}</Title>
+                  </Center>
+                  <Center>
+                    <Canvas
                       text={`http://jaycamper.com/Groups/Private/${Data}`}
                       options={{
                         type: 'image/jpeg',
@@ -151,14 +175,18 @@ const CreateGroup: NextPage = () => {
                         },
                       }}
                     />
-                    </Center>
-                   <Center> <NextButton size="lg" href="/" title="Return Home" /> </Center>
-                      </SimpleGrid>
-                    </Center>
-                  </Paper>
-                   </Card>)}
-            </Container>
-        </>
+                  </Center>
+                  <Center>
+                    {' '}
+                    <NextButton size="lg" href="/" title="Return Home" />{' '}
+                  </Center>
+                </SimpleGrid>
+              </Center>
+            </Paper>
+          </Card>
+        )}
+      </Container>
+    </>
   );
 };
 

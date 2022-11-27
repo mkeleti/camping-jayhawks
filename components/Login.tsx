@@ -32,14 +32,14 @@ const Container = (props) => {
           <Grid>
             <Grid.Col>
               <Center>
-              <Text>Signed in: {user.email}</Text>
+                <Text>Signed in: {user.email}</Text>
               </Center>
             </Grid.Col>
             <Grid.Col>
-            <Center>
-              <Button size="xl" onClick={() => props.supabaseClient.auth.signOut()}>
-                Sign out
-              </Button>
+              <Center>
+                <Button size="xl" onClick={() => props.supabaseClient.auth.signOut()}>
+                  Sign out
+                </Button>
               </Center>
             </Grid.Col>
           </Grid>
@@ -57,7 +57,7 @@ export default function AuthBasic() {
     <Auth.UserContextProvider supabaseClient={supabaseClient}>
       <Container supabaseClient={supabaseClient}>
         <Auth
-          providers={["github"]}
+          providers={['github']}
           supabaseClient={supabaseClient}
           redirectTo="https://jaycamper.com"
           appearance={{ theme: ThemeSupa }}

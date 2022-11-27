@@ -1,7 +1,6 @@
-import type { NextPage } from "next"
-import { Container, Paper, Title, Center, Card, Group, MediaQuery } from "@mantine/core"
+import type { NextPage } from 'next';
+import { Container, Paper, Title, Center, Card, Group, MediaQuery } from '@mantine/core';
 import Head from 'next/head';
-
 
 export const fourofour: NextPage = () => (
   <>

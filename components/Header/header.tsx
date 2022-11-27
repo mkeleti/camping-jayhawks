@@ -1,11 +1,4 @@
-import {
-  createStyles,
-  Header,
-  Container,
-  Group,
-  Burger,
-  Center,
-} from '@mantine/core';
+import { createStyles, Header, Container, Group, Burger, Center } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import Image from 'next/image';
 import NextButton from '../NextButton';
@@ -38,18 +31,12 @@ const useStyles = createStyles((theme) => ({
     padding: '8px 12px',
     borderRadius: theme.radius.sm,
     textDecoration: 'none',
-    color:
-            theme.colorScheme === 'dark'
-              ? theme.colors.dark[0]
-              : theme.colors.gray[7],
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[7],
     fontSize: theme.fontSizes.sm,
     fontWeight: 500,
 
     '&:hover': {
-      backgroundColor:
-                theme.colorScheme === 'dark'
-                  ? theme.colors.dark[6]
-                  : theme.colors.gray[0],
+      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
     },
   },
 
@@ -68,7 +55,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface HeaderSimpleProps {
-  links: { link: string; label: string }[]
+  links: { link: string; label: string }[];
 }
 
 export function HeaderSimple({ links }: HeaderSimpleProps) {
@@ -77,27 +64,25 @@ export function HeaderSimple({ links }: HeaderSimpleProps) {
 
   const user = useUser();
   const items = links.map((link) => (
-        <NextButton color="blue" key={`${link.label}-`} href={link.link} title={link.label} />
+    <NextButton color="blue" key={`${link.label}-`} href={link.link} title={link.label} />
   ));
 
   return (
-        <Header height={60} mb={120}>
-            <Container fluid className={classes.header}>
-                <Image src={logo} width={180} height={64} quality={100} />
-                <Center>
-                <Group spacing={5} className={classes.links}>
-                    {items}
-                </Group>
-                </Center>
-                <Burger
-                  opened={opened}
-                  onClick={toggle}
-                  className={classes.burger}
-                  size="sm"
-                />
-                {!user ? (<NextButton color="blue"  href={"/login"} title={"Login"} />) : (<NextButton color="green"  href={"/login"} title={"Sign Out"} />)}
-            </Container>
-            
-        </Header>
+    <Header height={60} mb={120}>
+      <Container fluid className={classes.header}>
+        <Image src={logo} width={180} height={64} quality={100} />
+        <Center>
+          <Group spacing={5} className={classes.links}>
+            {items}
+          </Group>
+        </Center>
+        <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
+        {!user ? (
+          <NextButton color="blue" href={'/login'} title={'Login'} />
+        ) : (
+          <NextButton color="green" href={'/login'} title={'Sign Out'} />
+        )}
+      </Container>
+    </Header>
   );
 }

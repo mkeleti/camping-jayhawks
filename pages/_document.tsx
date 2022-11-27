@@ -9,19 +9,19 @@ export default class _Document extends Document {
 
   render() {
     return (
-            <Html>
-                <Head>
-                    <link
-                      href="https://fonts.googleapis.com/css2?family=Poppins&display=optional"
-                      rel="stylesheet"
-                    />
-                    <link rel="icon" href="/favicon.png" />
-                </Head>
-                <body>
-                    <Main />
-                    <NextScript />
-                </body>
-            </Html>
+      <Html>
+        <Head>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Poppins&display=optional"
+            rel="stylesheet"
+          />
+          <link rel="icon" href="/favicon.png" />
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
     );
   }
 }

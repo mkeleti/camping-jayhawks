@@ -28,7 +28,10 @@ const PrivateJoin: NextPage = () => {
     members?: string[] | unknown;
   };
   async function fetchMembers(): Promise<Members[] | null> {
-    const response = await supabase.from<'groups', Group>('groups').select('members').eq('groupid', groupid);
+    const response = await supabase
+      .from<'groups', Group>('groups')
+      .select('members')
+      .eq('groupid', groupid);
     if (Array.isArray(response.data)) {
       // @ts-ignore
       return response.data[0];
@@ -38,7 +41,7 @@ const PrivateJoin: NextPage = () => {
 
   async function updateTable(values: { name: string }) {
     let memberlist;
-    if (await fetchMembers() != null) {
+    if ((await fetchMembers()) != null) {
       memberlist = await fetchMembers();
       memberlist = memberlist.members;
       const updatemember = memberlist.pop();
@@ -49,7 +52,7 @@ const PrivateJoin: NextPage = () => {
     memberlist.push(values.name);
     await supabase
       .from<'groups', Group>('groups')
-    // @ts-ignore
+      // @ts-ignore
       .update({ members: memberlist })
       .eq('groupid', groupid);
     router.push('/');
@@ -62,30 +65,36 @@ const PrivateJoin: NextPage = () => {
   });
 
   return (
-        <>
-            <Container>
-                <Center>
-                    <Title>Join Private group</Title>
-                </Center>
-                <Card radius="md" shadow="sm" p="md" mt="lg">
-                    <Paper>
-                      <Text mb="lg">Enter your name to join the private group group.</Text>
-                            <form onSubmit={form.onSubmit((values) => { updateTable(values); })}>
-                                <TextInput
-                                  label="Your Name"
-                                  withAsterisk
-                                  size="lg"
-                                  placeholder="John Doe"
-                                  {...form.getInputProps('name')}
-                                />
-                                <Group position="center" mt="lg">
-                                    <Button size="lg" type="submit">Submit</Button>
-                                </Group>
-                            </form>
-                    </Paper>
-                </Card>
-            </Container>
-        </>
+    <>
+      <Container>
+        <Center>
+          <Title>Join Private group</Title>
+        </Center>
+        <Card radius="md" shadow="sm" p="md" mt="lg">
+          <Paper>
+            <Text mb="lg">Enter your name to join the private group group.</Text>
+            <form
+              onSubmit={form.onSubmit((values) => {
+                updateTable(values);
+              })}
+            >
+              <TextInput
+                label="Your Name"
+                withAsterisk
+                size="lg"
+                placeholder="John Doe"
+                {...form.getInputProps('name')}
+              />
+              <Group position="center" mt="lg">
+                <Button size="lg" type="submit">
+                  Submit
+                </Button>
+              </Group>
+            </form>
+          </Paper>
+        </Card>
+      </Container>
+    </>
   );
 };
 

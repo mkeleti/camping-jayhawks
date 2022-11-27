@@ -13,7 +13,7 @@ export default function App({
 }: AppProps<{
   initialSession: Session;
 }>) {
-  const [supabaseClient] = useState(() => createBrowserSupabaseClient())
+  const [supabaseClient] = useState(() => createBrowserSupabaseClient());
   return (
     <>
       <Head>
@@ -118,10 +118,13 @@ export default function App({
         }}
       >
         <NotificationsProvider position="top-right" zIndex={2077}>
-          <SessionContextProvider supabaseClient={supabaseClient} initialSession={pageProps.initialSession}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <SessionContextProvider
+            supabaseClient={supabaseClient}
+            initialSession={pageProps.initialSession}
+          >
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
           </SessionContextProvider>
         </NotificationsProvider>
       </MantineProvider>

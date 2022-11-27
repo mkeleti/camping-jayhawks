@@ -13,9 +13,17 @@ type ButtonProps = {
 };
 
 const NextButton = (props: ButtonProps) => (
-        <Link href={props.href} passHref>
-          {props.disabled ? (<Button component="a" disabled color={props.color} size={props.size}>{props.title}</Button>) : (<Button component="a" color={props.color} size={props.size}>{props.title}</Button>)}
-        </Link>
+  <Link href={props.href} passHref>
+    {props.disabled ? (
+      <Button component="a" disabled color={props.color} size={props.size}>
+        {props.title}
+      </Button>
+    ) : (
+      <Button component="a" color={props.color} size={props.size}>
+        {props.title}
+      </Button>
+    )}
+  </Link>
 );
 
 export default NextButton;

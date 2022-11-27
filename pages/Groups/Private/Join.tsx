@@ -14,7 +14,6 @@ import { useForm } from '@mantine/form';
 import type { NextPage } from 'next';
 import { definitions } from '../../../types/supabase';
 
-
 const Join: NextPage = () => {
   // Once submitted data is stored in this state
   type Group = definitions['groups'];
@@ -28,30 +27,36 @@ const Join: NextPage = () => {
   });
 
   return (
-        <>
-            <Container>
-                <Center>
-                    <Title>Join Private Group</Title>
-                </Center>
-                <Card radius="md" shadow="sm" p="md" mt="lg">
-                    <Paper>
-                      <Text mb="lg">Enter the private group passcode to join.</Text>
-                            <form onSubmit={form.onSubmit((values) => { router.push(`/Groups/Private/${values.Id}`); })}>
-                                <TextInput
-                                  label="Group ID"
-                                  withAsterisk
-                                  size="lg"
-                                  placeholder="1234-1234-1234-1234-1234"
-                                  {...form.getInputProps('Id')}
-                                />
-                                <Group position="center" mt="lg">
-                                    <Button size="lg" type="submit">Submit</Button>
-                                </Group>
-                            </form>
-                    </Paper>
-                </Card>
-            </Container>
-        </>
+    <>
+      <Container>
+        <Center>
+          <Title>Join Private Group</Title>
+        </Center>
+        <Card radius="md" shadow="sm" p="md" mt="lg">
+          <Paper>
+            <Text mb="lg">Enter the private group passcode to join.</Text>
+            <form
+              onSubmit={form.onSubmit((values) => {
+                router.push(`/Groups/Private/${values.Id}`);
+              })}
+            >
+              <TextInput
+                label="Group ID"
+                withAsterisk
+                size="lg"
+                placeholder="1234-1234-1234-1234-1234"
+                {...form.getInputProps('Id')}
+              />
+              <Group position="center" mt="lg">
+                <Button size="lg" type="submit">
+                  Submit
+                </Button>
+              </Group>
+            </form>
+          </Paper>
+        </Card>
+      </Container>
+    </>
   );
 };
 
