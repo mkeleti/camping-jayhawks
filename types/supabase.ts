@@ -145,8 +145,10 @@ export interface paths {
     get: {
       parameters: {
         query: {
-          groupid?: parameters["rowFilter.voting.groupid"];
           suspend?: parameters["rowFilter.voting.suspend"];
+          created?: parameters["rowFilter.voting.created"];
+          email?: parameters["rowFilter.voting.email"];
+          votes?: parameters["rowFilter.voting.votes"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -197,8 +199,10 @@ export interface paths {
     delete: {
       parameters: {
         query: {
-          groupid?: parameters["rowFilter.voting.groupid"];
           suspend?: parameters["rowFilter.voting.suspend"];
+          created?: parameters["rowFilter.voting.created"];
+          email?: parameters["rowFilter.voting.email"];
+          votes?: parameters["rowFilter.voting.votes"];
         };
         header: {
           /** Preference */
@@ -213,8 +217,10 @@ export interface paths {
     patch: {
       parameters: {
         query: {
-          groupid?: parameters["rowFilter.voting.groupid"];
           suspend?: parameters["rowFilter.voting.suspend"];
+          created?: parameters["rowFilter.voting.created"];
+          email?: parameters["rowFilter.voting.email"];
+          votes?: parameters["rowFilter.voting.votes"];
         };
         body: {
           /** voting */
@@ -284,17 +290,21 @@ export interface definitions {
   };
   voting: {
     /**
-     * Format: uuid
-     * @description Note:
-     * This is a Primary Key.<pk/>
-     * This is a Foreign Key to `groups.groupid`.<fk table='groups' column='groupid'/>
-     */
-    groupid: string;
-    /**
      * Format: boolean
      * @default false
      */
     suspend?: boolean;
+    /**
+     * Format: timestamp with time zone
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     * @default (now() AT TIME ZONE 'utc'::text)
+     */
+    created: string;
+    /** Format: ARRAY */
+    email?: unknown[];
+    /** Format: real */
+    votes?: number;
   };
 }
 
@@ -372,10 +382,14 @@ export interface parameters {
   "rowFilter.groups.emails": string;
   /** @description voting */
   "body.voting": definitions["voting"];
-  /** Format: uuid */
-  "rowFilter.voting.groupid": string;
   /** Format: boolean */
   "rowFilter.voting.suspend": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.voting.created": string;
+  /** Format: ARRAY */
+  "rowFilter.voting.email": string;
+  /** Format: real */
+  "rowFilter.voting.votes": string;
 }
 
 export interface operations {}

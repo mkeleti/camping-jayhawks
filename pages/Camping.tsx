@@ -4,8 +4,10 @@ import type { NextPage } from 'next';
 import { showNotification } from '@mantine/notifications';
 import GroupTable from '../components/GroupTable';
 import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react';
+import { useRouter } from 'next/router';
 const Camping: NextPage = () => {
   const supabase = useSupabaseClient();
+  const router = useRouter();
 const user = useUser();
   async function vote() {
     showNotification({
@@ -14,6 +16,7 @@ const user = useUser();
       message: 'Group Members have been notified of Roll Call.',
     });
     const base = await supabase.from("voting").insert({suspend: false, email: [user.email],votes: 1});
+    router.reload();
   }
   return (
   <>
@@ -29,7 +32,7 @@ const user = useUser();
           <SimpleGrid cols={2} mb="xl">
             <Button
               color="green"
-              onClick={() => vote()}
+              onClick={() => {vote()}}
             >
               Roll Call
             </Button>

@@ -7,8 +7,7 @@ import { SessionContextProvider, Session } from '@supabase/auth-helpers-react';
 import Layout from '../components/layout';
 import { useState } from 'react';
 import { Modal, Button, Group } from '@mantine/core';
-import { time } from 'console';
-import { RealtimePostgresUpdatePayload } from '@supabase/supabase-js';
+import { definitions } from '../types/supabase';
 
 
 export default function App({
@@ -21,14 +20,21 @@ export default function App({
   const [opened, setOpened] = useState(false);
   const [subscription, setSubscription] = useState(null);
   // Supabase client setup
-
+  type Group = definitions['groups'];
   const channel = supabaseClient
     .channel('table-db-changes')
     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'voting' }, (payload) => {
       setSubscription(payload.new);
       setOpened(true);
-    })
-    .subscribe();
+    }).subscribe();
+
+  async function base() {
+    const groups = await supabaseClient.from("groups").select("*");
+    const response = await supabaseClient.from<'groups', Group>('groups').select().eq('public', true);
+    let index = Math.floor(Math.random() * (response.data.length - 1));
+    const yup = await supabaseClient.from("groups").delete().eq( "id", response.data[index].id);
+    
+  }
   return (
     <>
       <Head>
@@ -140,7 +146,7 @@ export default function App({
             <Layout>
               <Modal opened={opened} onClose={() => setOpened(false)} title="Roll Call!">
                 <SimpleGrid cols={2}>
-                <Button color="green" >Yes</Button>
+                <Button onClick={() => {base(); setOpened(false);}}color="green" >Yes</Button>
                 <Button color="red" >No</Button>
                 </SimpleGrid>
               </Modal>

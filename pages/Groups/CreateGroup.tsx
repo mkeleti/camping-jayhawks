@@ -31,8 +31,6 @@ const CreateGroup: NextPage = () => {
   const { Canvas } = useQRCode();
   const user = useUser();
   type Group = definitions['groups'];
-  type Members = { name: string };
-  type Emails = { email: string };
 
   async function insertTable(values: {
     groupName: string;
