@@ -1,11 +1,15 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import { MantineProvider } from '@mantine/core';
-import { NotificationsProvider } from '@mantine/notifications';
+import { MantineProvider, SimpleGrid } from '@mantine/core';
+import { NotificationsProvider, showNotification } from '@mantine/notifications';
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { SessionContextProvider, Session } from '@supabase/auth-helpers-react';
 import Layout from '../components/layout';
 import { useState } from 'react';
+import { Modal, Button, Group } from '@mantine/core';
+import { time } from 'console';
+import { RealtimePostgresUpdatePayload } from '@supabase/supabase-js';
+
 
 export default function App({
   Component,
@@ -14,6 +18,17 @@ export default function App({
   initialSession: Session;
 }>) {
   const [supabaseClient] = useState(() => createBrowserSupabaseClient());
+  const [opened, setOpened] = useState(false);
+  const [subscription, setSubscription] = useState(null);
+  // Supabase client setup
+
+  const channel = supabaseClient
+    .channel('table-db-changes')
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'voting' }, (payload) => {
+      setSubscription(payload.new);
+      setOpened(true);
+    })
+    .subscribe();
   return (
     <>
       <Head>
@@ -123,6 +138,12 @@ export default function App({
             initialSession={pageProps.initialSession}
           >
             <Layout>
+              <Modal opened={opened} onClose={() => setOpened(false)} title="Roll Call!">
+                <SimpleGrid cols={2}>
+                <Button color="green" onClick={}>Yes</Button>
+                <Button color="red" onClick={}>No</Button>
+                </SimpleGrid>
+              </Modal>
               <Component {...pageProps} />
             </Layout>
           </SessionContextProvider>
