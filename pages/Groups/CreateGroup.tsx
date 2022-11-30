@@ -21,6 +21,7 @@ import { useQRCode } from 'next-qrcode';
 import { definitions } from '../../types/supabase';
 import NextButton from '../../components/NextButton';
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
+import { userAgent } from 'next/server';
 
 const CreateGroup: NextPage = () => {
   const [notPrivate, setPrivate] = useState<boolean>(true);
@@ -28,23 +29,37 @@ const CreateGroup: NextPage = () => {
   const router = useRouter();
   const supabase = useSupabaseClient();
   const { Canvas } = useQRCode();
-
+  const user = useUser();
   type Group = definitions['groups'];
   type Members = { name: string };
+  type Emails = { email: string };
 
-  async function insertTable(values: { groupName: string; public: boolean; members: Members[] }) {
+  async function insertTable(values: {
+    groupName: string;
+    public: boolean;
+    users: {
+      name: string;
+      email: string;
+    }[];
+  }) {
     const memberList = new Array<String>();
+    const emailList = new Array<String>();
 
-    values.members.forEach((element, index) => {
-      if (index < values.members.length - 1) {
+    values.users.forEach((element, index) => {
+      if (index < values.users.length - 1) {
         memberList.push(`${element.name}, `);
       } else {
         memberList.push(`${element.name}`);
       }
     });
+
+    values.users.forEach((element, index) => {
+      emailList.push(`${element.email}`);
+    });
+
     const data = await supabase.from<'groups', Group>('groups').insert([
       // @ts-ignore
-      { name: values.groupName, public: values.public, members: memberList },
+      { name: values.groupName, public: values.public, members: memberList, emails: emailList },
     ]);
     if (values.public) {
       router.push('/');
@@ -59,27 +74,36 @@ const CreateGroup: NextPage = () => {
     }
   }
 
+  var formatted;
+  if (user == null) {
+    formatted = "email@email.com";
+  }
+  else {
+    formatted = user.email;
+  }
+
   const form = useForm({
     initialValues: {
-      groupName: '',
-      public: true,
-      members: [{ name: 'John Doe' }],
+        groupName: "",
+        public: true,
+        users: [{
+          name: "john doe",
+          email: formatted,
+        }],
     },
   });
 
-  const fields = form.values.members.map((name, index) => (
-    <Draggable key={index} index={index} draggableId={index.toString()}>
-      {(provided) => (
-        <Group ref={provided.innerRef} mt="xs" {...provided.draggableProps}>
-          <Center {...provided.dragHandleProps}>
-            <IconGripVertical size={18} />
-          </Center>
-          {resetServerContext()}
-          <TextInput placeholder="John Doe" {...form.getInputProps(`members.${index}.name`)} />
-        </Group>
-      )}
-    </Draggable>
-  ));
+  const fields = form.values.users.map((name, index) => {
+    return(
+    <SimpleGrid key={index} cols={2}>
+      <TextInput
+        placeholder="John Doe"
+        required
+        {...form.getInputProps(`users.${index}.name`)}
+      />
+      <TextInput placeholder="email" required {...form.getInputProps(`users.${index}.email`)} />
+    </SimpleGrid>
+  )});
 
   return (
     <>
@@ -113,23 +137,15 @@ const CreateGroup: NextPage = () => {
                 {...form.getInputProps('public', { type: 'checkbox' })}
                 label="Public Group?"
               />
-              <DragDropContext
-                onDragEnd={({ destination, source }) =>
-                  form.reorderListItem('members', { from: source.index, to: destination.index })
-                }
-              >
-                <Droppable droppableId="dnd-list" direction="vertical">
-                  {(provided) => (
-                    <div {...provided.droppableProps} ref={provided.innerRef}>
-                      {fields}
-                      {provided.placeholder}
-                    </div>
-                  )}
-                </Droppable>
-              </DragDropContext>
+              {fields}
 
               <Group position="left" mt="md" ml="xl">
-                <Button size="sm" onClick={() => form.insertListItem('members', { name: '' })}>
+                <Button
+                  size="sm"
+                  onClick={() => {
+                    form.insertListItem('users', { name: 'John Doe', email: 'email' });
+                  }}
+                >
                   Add Member
                 </Button>
               </Group>
