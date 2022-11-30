@@ -140,8 +140,8 @@ export default function App({
             <Layout>
               <Modal opened={opened} onClose={() => setOpened(false)} title="Roll Call!">
                 <SimpleGrid cols={2}>
-                <Button color="green" onClick={}>Yes</Button>
-                <Button color="red" onClick={}>No</Button>
+                <Button color="green" >Yes</Button>
+                <Button color="red" >No</Button>
                 </SimpleGrid>
               </Modal>
               <Component {...pageProps} />
