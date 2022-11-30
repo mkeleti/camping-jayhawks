@@ -3,8 +3,19 @@ import Head from 'next/head';
 import type { NextPage } from 'next';
 import { showNotification } from '@mantine/notifications';
 import GroupTable from '../components/GroupTable';
-
-const Camping: NextPage = () => (
+import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react';
+const Camping: NextPage = () => {
+  const supabase = useSupabaseClient();
+const user = useUser();
+  async function vote() {
+    showNotification({
+      autoClose: 2000,
+      title: 'Roll Called!',
+      message: 'Group Members have been notified of Roll Call.',
+    });
+    const base = await supabase.from("voting").insert({suspend: false, email: [user.email],votes: 1});
+  }
+  return (
   <>
     <Head>
       <title>Camping</title>
@@ -18,13 +29,7 @@ const Camping: NextPage = () => (
           <SimpleGrid cols={2} mb="xl">
             <Button
               color="green"
-              onClick={() => {
-                showNotification({
-                  autoClose: 5000,
-                  title: 'Roll Called!',
-                  message: 'Group Members have been notified of Roll Call.',
-                });
-              }}
+              onClick={() => vote()}
             >
               Roll Call
             </Button>
@@ -48,5 +53,6 @@ const Camping: NextPage = () => (
     </Container>
   </>
 );
+            }
 
 export default Camping;
