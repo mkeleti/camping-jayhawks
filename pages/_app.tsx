@@ -8,6 +8,7 @@ import Layout from '../components/layout';
 import { useState } from 'react';
 import { Modal, Button, Group } from '@mantine/core';
 import { definitions } from '../types/supabase';
+import router from 'next/router';
 
 
 export default function App({
@@ -170,7 +171,7 @@ function showPosition(position) {
               <Modal opened={opened} onClose={() => setOpened(false)} title="Roll Call!">
                 <SimpleGrid cols={2}>
                 <Button onClick={() => {
-                  getLocation(); setOpened(false);}}color="green" >Yes</Button>
+                  getLocation(); setOpened(false); router.reload();}}color="green" >Yes</Button>
                 <Button color="red" onClick={() => setOpened(false)} >No</Button>
                 </SimpleGrid>
               </Modal>

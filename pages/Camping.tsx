@@ -41,7 +41,6 @@ const user = useUser();
       message: 'Group Members have been notified of Roll Call.',
     });
     const base = await supabase.from("voting").insert({suspend: false, email: [user.email],votes: 1});
-    router.reload();
   }
   return (
   <>
