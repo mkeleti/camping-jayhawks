@@ -28,6 +28,9 @@ export interface paths {
           public?: parameters["rowFilter.groups.public"];
           /** Group ID - used to join group */
           groupid?: parameters["rowFilter.groups.groupid"];
+          /** Vote to suspend game */
+          suspend?: parameters["rowFilter.groups.suspend"];
+          emails?: parameters["rowFilter.groups.emails"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -90,6 +93,9 @@ export interface paths {
           public?: parameters["rowFilter.groups.public"];
           /** Group ID - used to join group */
           groupid?: parameters["rowFilter.groups.groupid"];
+          /** Vote to suspend game */
+          suspend?: parameters["rowFilter.groups.suspend"];
+          emails?: parameters["rowFilter.groups.emails"];
         };
         header: {
           /** Preference */
@@ -116,10 +122,103 @@ export interface paths {
           public?: parameters["rowFilter.groups.public"];
           /** Group ID - used to join group */
           groupid?: parameters["rowFilter.groups.groupid"];
+          /** Vote to suspend game */
+          suspend?: parameters["rowFilter.groups.suspend"];
+          emails?: parameters["rowFilter.groups.emails"];
         };
         body: {
           /** groups */
           groups?: definitions["groups"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
+  "/voting": {
+    get: {
+      parameters: {
+        query: {
+          groupid?: parameters["rowFilter.voting.groupid"];
+          suspend?: parameters["rowFilter.voting.suspend"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["voting"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** voting */
+          voting?: definitions["voting"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          groupid?: parameters["rowFilter.voting.groupid"];
+          suspend?: parameters["rowFilter.voting.suspend"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          groupid?: parameters["rowFilter.voting.groupid"];
+          suspend?: parameters["rowFilter.voting.suspend"];
+        };
+        body: {
+          /** voting */
+          voting?: definitions["voting"];
         };
         header: {
           /** Preference */
@@ -158,7 +257,7 @@ export interface definitions {
      * Format: ARRAY
      * @description Members of the group int array
      */
-    members?: string[];
+    members?: unknown[];
     /**
      * Format: boolean
      * @description Public or private
@@ -174,6 +273,28 @@ export interface definitions {
      * @default extensions.uuid_generate_v4()
      */
     groupid: string;
+    /**
+     * Format: boolean
+     * @description Vote to suspend game
+     * @default false
+     */
+    suspend: boolean;
+    /** Format: ARRAY */
+    emails?: unknown[];
+  };
+  voting: {
+    /**
+     * Format: uuid
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     * This is a Foreign Key to `groups.groupid`.<fk table='groups' column='groupid'/>
+     */
+    groupid: string;
+    /**
+     * Format: boolean
+     * @default false
+     */
+    suspend?: boolean;
   };
 }
 
@@ -242,6 +363,19 @@ export interface parameters {
    * @description Group ID - used to join group
    */
   "rowFilter.groups.groupid": string;
+  /**
+   * Format: boolean
+   * @description Vote to suspend game
+   */
+  "rowFilter.groups.suspend": string;
+  /** Format: ARRAY */
+  "rowFilter.groups.emails": string;
+  /** @description voting */
+  "body.voting": definitions["voting"];
+  /** Format: uuid */
+  "rowFilter.voting.groupid": string;
+  /** Format: boolean */
+  "rowFilter.voting.suspend": string;
 }
 
 export interface operations {}

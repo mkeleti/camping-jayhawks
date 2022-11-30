@@ -13,8 +13,8 @@ import {
 import { useForm } from '@mantine/form';
 import type { NextPage } from 'next';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { definitions } from '../../../types/supabase';
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
+import { definitions } from '../../../types/supabase';
 
 const PrivateJoin: NextPage = () => {
   // Once submitted data is stored in this state
@@ -38,25 +38,47 @@ const PrivateJoin: NextPage = () => {
     }
     return null;
   }
+  const user = useUser();
+  async function fetchEmails(): Promise<string[] | null> {
+    const response = await supabase
+      .from<'groups', Group>('groups')
+      .select('emails')
+      .eq('groupid', groupid);
+    if (response.data != null) {
+      // @ts-ignore
+      return response.data[0];
+    }
+    return null;
+  }
 
   async function updateTable(values: { name: string }) {
     let memberlist;
+    let emaillist = await fetchEmails();
     if ((await fetchMembers()) != null) {
       memberlist = await fetchMembers();
       memberlist = memberlist.members;
       const updatemember = memberlist.pop();
       memberlist.push(`${updatemember}, `);
     } else {
+      emaillist = new Array<string>();
       memberlist = new Array<string>();
     }
     memberlist.push(values.name);
+    emaillist.push(user?.email);
     await supabase
       .from<'groups', Group>('groups')
       // @ts-ignore
       .update({ members: memberlist })
       .eq('groupid', groupid);
+
+    await supabase
+      .from<'groups', Group>('groups')
+      // @ts-ignore
+      .update({ emails: emaillist })
+      .eq('groupid', groupid);
     router.push('/');
   }
+
   // useForm hook handles form state and validation
   const form = useForm({
     initialValues: {
