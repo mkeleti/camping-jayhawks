@@ -48,13 +48,19 @@ export default function App({
 function showPosition(position) {
   let lat = position.coords.latitude;
   let long = position.coords.longitude;
-  let ku = {lat: 38.95834, long: -95.24751}
-  let correct_lat = (lat <= ku.lat + 0.01 && lat >= ku.lat - 0.01);
-  let correct_long = (long <= ku.long + 0.01 && long >= ku.long - 0.01);
+  let ku = {lat: 38.9543125, long: -95.2528214}
+  let correct_lat = (lat <= ku.lat + 0.005 && lat >= ku.lat - 0.005);
+  let correct_long = (long <= ku.long + 0.005 && long >= ku.long - 0.005);
   if (correct_lat && correct_long) {
     base();
   }
   else {
+    showNotification({
+    autoClose: 5000,
+    color: 'pink',
+    title: 'Incorrect Location',
+    message: 'Must be at allen field house to roll call.',
+  });
     return false;
   }
 }
