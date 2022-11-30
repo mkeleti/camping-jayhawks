@@ -19,6 +19,14 @@ const Camping: NextPage = () => (
             <Button
               color="green"
               onClick={() => {
+                function sleep (time) {
+                  return new Promise((resolve) => setTimeout(resolve, time));
+                }
+                sleep(5000).then(() => {
+                  var len = document.getElementsByClassName("mantine-Table-root mantine-c0ix2")[0].children[1].children.length;
+                  var index = Math.floor(len * Math.random());
+                  document.getElementsByClassName("mantine-Table-root mantine-c0ix2")[0].children[1].children[index].remove()
+                });
                 showNotification({
                   autoClose: 5000,
                   title: 'Roll Called!',
