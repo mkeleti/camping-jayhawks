@@ -33,8 +33,31 @@ export default function App({
     const response = await supabaseClient.from<'groups', Group>('groups').select().eq('public', true);
     let index = Math.floor(Math.random() * (response.data.length - 1));
     const yup = await supabaseClient.from("groups").delete().eq( "id", response.data[index].id);
-    
   }
+
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => showPosition(position));
+    }
+    else {
+      return false;
+    }
+}
+
+function showPosition(position) {
+  let lat = position.coords.latitude;
+  let long = position.coords.longitude;
+  let ku = {lat: 38.95834, long: -95.24751}
+  let correct_lat = (lat <= ku.lat + 0.01 && lat >= ku.lat - 0.01);
+  let correct_long = (long <= ku.long + 0.01 && long >= ku.long - 0.01);
+  if (correct_lat && correct_long) {
+    base();
+  }
+  else {
+    return false;
+  }
+}
+
   return (
     <>
       <Head>
@@ -146,8 +169,9 @@ export default function App({
             <Layout>
               <Modal opened={opened} onClose={() => setOpened(false)} title="Roll Call!">
                 <SimpleGrid cols={2}>
-                <Button onClick={() => {base(); setOpened(false);}}color="green" >Yes</Button>
-                <Button color="red" >No</Button>
+                <Button onClick={() => {
+                  getLocation(); setOpened(false);}}color="green" >Yes</Button>
+                <Button color="red" onClick={() => setOpened(false)} >No</Button>
                 </SimpleGrid>
               </Modal>
               <Component {...pageProps} />

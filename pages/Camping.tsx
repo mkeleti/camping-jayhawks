@@ -8,6 +8,31 @@ import { useRouter } from 'next/router';
 const Camping: NextPage = () => {
   const supabase = useSupabaseClient();
   const router = useRouter();
+
+
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => showPosition(position));
+    }
+    else {
+      return false;
+    }
+}
+
+function showPosition(position) {
+  let lat = position.coords.latitude;
+  let long = position.coords.longitude;
+  let ku = {lat: 38.95834, long: -95.24751}
+  let correct_lat = (lat <= ku.lat + 0.01 && lat >= ku.lat - 0.01);
+  let correct_long = (long <= ku.long + 0.01 && long >= ku.long - 0.01);
+  if (correct_lat && correct_long) {
+    vote();
+  }
+  else {
+    return false;
+  }
+}
+
 const user = useUser();
   async function vote() {
     showNotification({
@@ -32,7 +57,7 @@ const user = useUser();
           <SimpleGrid cols={2} mb="xl">
             <Button
               color="green"
-              onClick={() => {vote()}}
+              onClick={() => {getLocation()}}
             >
               Roll Call
             </Button>
